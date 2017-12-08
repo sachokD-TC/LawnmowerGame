@@ -2,6 +2,7 @@ package com.waasche.lawnmower.resources;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -49,7 +50,9 @@ public class Assets {
     public static Sprite spriteIconStarFill;
     public static Sprite spriteTitle;
     public static Sprite spriteButtonBack;
-
+    public static Sound soundClick;
+    public static float pitchBackClick;
+    public static Sprite spriteButtonHelp;
 
     public static void load() {
         lawnmowerUpRight = createLawnmoverSprite("actor/up-right.png");
@@ -74,6 +77,7 @@ public class Assets {
         spriteIconStar = createSprite("menu/icon_star.png");
         spriteIconStarFill = createSprite("menu/icon_star.png");
         spriteButtonBack = createSprite("menu/back_button.png");
+        spriteButtonHelp = createSprite("menu/help_button.png");
         colorButtonLevelIncomplete = createColor(50, 50, 50);
     }
 

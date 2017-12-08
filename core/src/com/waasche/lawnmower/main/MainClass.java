@@ -4,7 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
 import com.waasche.lawnmower.data.GameProgress;
 import com.waasche.lawnmower.resources.Assets;
-import com.waasche.lawnmower.screen.MainMenuScreen;
+import com.waasche.lawnmower.screen.StartScreen;
 
 
 public class MainClass extends ApplicationAdapter {
@@ -17,7 +17,7 @@ public class MainClass extends ApplicationAdapter {
         GameProgress.load();
         GameProgress.setLevelTypeCompleted("4", true);
         GameProgress.setCompleted("4", "1", true);
-        currentScreen = new MainMenuScreen(this);
+        currentScreen = new StartScreen(this);
         showCurrentScreen();
     }
 
