@@ -1,5 +1,6 @@
 package com.waasche.lawnmower.data;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
@@ -9,14 +10,16 @@ public class GameProgress {
 
     public static void load() {
         progress = Gdx.app.getPreferences("GameProgress");
-        progress.clear();
+        if (Gdx.app.getType().equals(Application.ApplicationType.Desktop)) {
+            progress.clear();
+        }
     }
 
     public static boolean isCompleted(String levelPackId, String levelId) {
         return progress.getBoolean(levelPackId + '.' + levelId, false);
     }
 
-    public static boolean isLevelTypeCompleted(String levelType){
+    public static boolean isLevelTypeCompleted(String levelType) {
         return progress.getBoolean(levelType, false);
     }
 

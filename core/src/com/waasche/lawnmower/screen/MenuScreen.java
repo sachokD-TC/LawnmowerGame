@@ -174,7 +174,7 @@ public abstract class MenuScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
