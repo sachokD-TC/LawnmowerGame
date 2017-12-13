@@ -12,10 +12,12 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.badlogic.gdx.utils.Timer;
 import com.waasche.lawnmower.controller.LawnmowerCameraController;
 import com.waasche.lawnmower.data.*;
 import com.waasche.lawnmower.main.MainClass;
 import com.waasche.lawnmower.resources.Assets;
+import com.waasche.lawnmower.resources.Sounds;
 import com.waasche.lawnmower.services.LevelService;
 
 import java.util.ArrayList;
@@ -27,8 +29,9 @@ public class GameScreen implements Screen {
     public static final int COMPLEXITY_INDEX = 0;
     private int levelInd;
     private int boardSize;
-    OrthographicCamera cam;
-    SpriteBatch fieldSpritesBatch;
+    private OrthographicCamera cam;
+    private SpriteBatch fieldSpritesBatch;
+    private SpriteBatch bgBatch;
     private Sprite[][] sprites;
     final Matrix4 matrix = new Matrix4();
     final Plane xzPlane = new Plane(new Vector3(0, 1, 0), 0);
@@ -40,6 +43,7 @@ public class GameScreen implements Screen {
     private boolean isMoving = false;
     private FieldLine currentLine;
     private LevelTypeMetaData levelTypeMetaData;
+    private boolean isStopped = false;
 
 
     public GameScreen(MainClass mainClass, LevelTypeMetaData levelPackMetaData, int levelInd) {
@@ -56,6 +60,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         lawnmower = Assets.lawnmowerUpRight;
+        Sounds.lwStarts(0.1f);
         cam = new OrthographicCamera(currentLevel.getSizeX() * 2, currentLevel.getSizeY() * 2 * (Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth()));
         cam.position.set(currentLevel.getSizeX(), currentLevel.getSizeY() * 0.5f, currentLevel.getSizeX());
         cam.direction.set(-1, -1, -1);
@@ -80,6 +85,7 @@ public class GameScreen implements Screen {
         currentLevel.addPassedPoints(startPoint);
         lawnmower.setSize(1, 1);
         fieldSpritesBatch = new SpriteBatch();
+        bgBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(new LawnmowerCameraController(cam));
     }
 
@@ -109,7 +115,14 @@ public class GameScreen implements Screen {
                 currentLevel.addPassedPoints(movePosition);
                 lawnmower.setLawnmowerPosition(movePosition);
                 if (LevelService.isFail(currentLevel, currentLine)) {
-                    backToMenu();
+                    Sounds.playCrashSound(0.1f);
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                          backToMenu();
+                        }
+                    }, Assets.DELAY_TIME_IN_SECONDS);
+
                 }
                 if (currentLine.getEnd() != null) {
                     currentLevel.addLineToPassedLines(currentLine);
@@ -118,8 +131,13 @@ public class GameScreen implements Screen {
                 if (LevelService.isOver(currentLevel, COMPLEXITY_INDEX)) {
                     moveToNextLevel();
                 }
+                isStopped = false;
             } else {
                 isMoving = false;
+                if(!isStopped) {
+                    Sounds.playTickSound(0.1f);
+                    isStopped = true;
+                }
                 if (LevelService.isOver(currentLevel, COMPLEXITY_INDEX)) {
                     moveToNextLevel();
                 }
@@ -127,6 +145,9 @@ public class GameScreen implements Screen {
         }
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         cam.update();
+        bgBatch.begin();
+        Assets.spriteBackground.draw(bgBatch);
+        bgBatch.end();
         fieldSpritesBatch.setProjectionMatrix(cam.combined);
         fieldSpritesBatch.setTransformMatrix(matrix);
         fieldSpritesBatch.begin();

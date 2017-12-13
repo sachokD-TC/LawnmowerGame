@@ -25,6 +25,7 @@ public class Assets {
     public static final float LOCK_HEIGHT = 100f;
     public static final float ANDROID_WIDTH = Gdx.graphics.getWidth();
     public static final float ANDROID_HEIGHT = Gdx.graphics.getHeight();
+    public static final long DELAY_TIME_IN_SECONDS = 2;
     public static Lawnmower lawnmowerUpRight;
     public static Color colorBackground;
     public static Color colorButtonLevelIncomplete;
@@ -47,12 +48,21 @@ public class Assets {
     private static float fontScale;
     public static I18NBundle strings;
     public static Sprite spriteIconStar;
-    public static Sprite spriteIconStarFill;
     public static Sprite spriteTitle;
+    public static Sprite spriteStart;
     public static Sprite spriteButtonBack;
+    public static Sprite spriteBackground;
     public static Sound soundClick;
-    public static float pitchBackClick;
+    public static float pitchBackClick = 1f;
     public static Sprite spriteButtonHelp;
+    public static Sprite spriteButtonSoundOn;
+    public static float pitchLwSound = 1f;
+    public static Sprite spriteButtonSoundOff;
+    public static Sound soundLwMove;
+    public static Sound soundTick;
+    public static Sound soundCrash;
+    public static final int VIBRATE_MSEC = 500;
+
 
     public static void load() {
         lawnmowerUpRight = createLawnmoverSprite("actor/up-right.png");
@@ -61,6 +71,7 @@ public class Assets {
         grassEmpty = new Sprite(new Texture(Gdx.files.internal("data/grass-empty.png")));
         wallSprite = new Sprite(new Texture(Gdx.files.internal("data/wall.png")));
         spriteTitle = createSprite("menu/title.png");
+        spriteStart = createSprite("actor/ic_launcher.png");
         lockOpen = createSprite("menu/lock_open.png");
         lockClosed = createSprite("menu/lock_closed.png");
         lockClosed.setSize(LOCK_WIDTH, LOCK_HEIGHT);
@@ -74,11 +85,17 @@ public class Assets {
         fontScale = 0.0f;
         strings = I18NBundle.createBundle(com.waasche.lawnmower.resources.AssetLoader.getInternalFileHandler("strings/strings"));
         colorText = createColor(255, 255, 255);
-        spriteIconStar = createSprite("menu/icon_star.png");
-        spriteIconStarFill = createSprite("menu/icon_star.png");
+        spriteIconStar = createSprite("menu/ok.png");
         spriteButtonBack = createSprite("menu/back_button.png");
         spriteButtonHelp = createSprite("menu/help_button.png");
+        spriteButtonSoundOn = createSprite("menu/sound_on.png");
+        spriteButtonSoundOff = createSprite("menu/sound_off.png");
+        spriteBackground = createSprite("menu/level_bg.png");
         colorButtonLevelIncomplete = createColor(50, 50, 50);
+        soundClick = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/click.ogg"));
+        soundLwMove = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/lwmove.mp3"));
+        soundTick = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/tick.mp3"));
+        soundCrash = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/crash.mp3"));
     }
 
     public static Sprite createSprite(String path) {

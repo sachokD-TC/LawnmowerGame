@@ -20,6 +20,7 @@ import com.waasche.lawnmower.data.Lock;
 import com.waasche.lawnmower.data.SessionData;
 import com.waasche.lawnmower.main.MainClass;
 import com.waasche.lawnmower.resources.Assets;
+import com.waasche.lawnmower.resources.Sounds;
 import com.waasche.lawnmower.services.LevelService;
 import com.waasche.lawnmower.services.MenuDrawingService;
 import com.waasche.lawnmower.view.LevelTypeActor;
@@ -65,8 +66,10 @@ public abstract class MenuScreen implements Screen {
         this.skin.add("buttonBack", Assets.spriteButtonBack, Sprite.class);
         this.skin.add("buttonHelp", Assets.spriteButtonHelp, Sprite.class);
         this.skin.add("iconStar", Assets.spriteIconStar, Sprite.class);
-        this.skin.add("iconStarFill", Assets.spriteIconStarFill, Sprite.class);
         this.skin.add("title", Assets.spriteTitle, Sprite.class);
+        this.skin.add("start", Assets.spriteStart, Sprite.class);
+        this.skin.add("buttonSoundOn", Assets.spriteButtonSoundOn, Sprite.class);
+        this.skin.add("buttonSoundOff", Assets.spriteButtonSoundOff, Sprite.class);
         Assets.updateFont(this.SCREEN_UNIT / 5.0f);
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         for (LevelTypeMetaData levelTypeMetaData : levelTypeMetaDataList) {
@@ -119,7 +122,7 @@ public abstract class MenuScreen implements Screen {
     }
 
 
-    private void createLayout() {
+    public void createLayout() {
         this.list.clearChildren();
         this.container.clearChildren();
         for (int i=0; i!=levelTypeMetaDataList.size(); i++) {
@@ -196,6 +199,7 @@ public abstract class MenuScreen implements Screen {
 
         public void clicked(InputEvent event, float x, float y) {
             SessionData.setLevelPackSelectScrollPosition(MenuScreen.this.scroll.getScrollY());
+            Sounds.playMenuClick(0.0f);
             mainClass.setCurrentScreen(new LevelSelectScreen(mainClass, actor.getMetaData()));
             mainClass.showCurrentScreen();
         }

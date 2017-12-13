@@ -65,7 +65,7 @@ public class LevelSelectScreen extends MenuScreen implements Screen {
         this.stage.addActor(this.container);
     }
 
-    private void createLayout() {
+    public void createLayout() {
         float f;
         this.container.clearChildren();
         fillLevelGrid();

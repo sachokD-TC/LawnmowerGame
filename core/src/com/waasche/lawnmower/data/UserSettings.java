@@ -13,6 +13,9 @@ public class UserSettings {
 
     public static void load() {
         preferences = Gdx.app.getPreferences("UserSettings");
+        if (!preferences.contains(SOUND)) {
+            preferences.putBoolean(SOUND, true);
+        }
         preferences.flush();
     }
 

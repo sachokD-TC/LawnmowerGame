@@ -38,7 +38,7 @@ public class LevelTypeActor extends Table {
         }
         Group iconStar = new Group();
         iconStar.addActor(iconStarBase);
-        Image iconStarFill = new Image(this.skin.getDrawable("iconStarFill"));
+        Image iconStarFill = new Image(this.skin.getDrawable("iconStar"));
         iconStarFill.setSize(this.size / 1.8f, this.size / 1.8f);
         iconStar.addActor(iconStarFill);
         return iconStar;
