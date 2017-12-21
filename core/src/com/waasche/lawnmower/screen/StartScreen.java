@@ -1,10 +1,13 @@
 package com.waasche.lawnmower.screen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.waasche.lawnmower.controller.MenuInputProcessor;
 import com.waasche.lawnmower.data.UserSettings;
 import com.waasche.lawnmower.main.MainClass;
 import com.waasche.lawnmower.resources.Sounds;
@@ -19,6 +22,7 @@ public class StartScreen  extends MenuScreen implements Screen {
     private MenuButtonActor buttonSettings;
     private MenuButtonActor buttonSound;
     private Image imageTitle = new Image(this.skin.getDrawable("title"));
+    protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
     public StartScreen(final MainClass mainClass) {
         super(mainClass, -1);
@@ -30,6 +34,10 @@ public class StartScreen  extends MenuScreen implements Screen {
                 mainClass.setCurrentScreen(new MainMenuScreen(mainClass));
             }
         });
+        createLayout();
+        inputMultiplexer.addProcessor(new MenuInputProcessor(this, mainClass));
+        inputMultiplexer.addProcessor(this.stage);
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     public void buttonClick(MenuButtonActor button) {
@@ -43,7 +51,6 @@ public class StartScreen  extends MenuScreen implements Screen {
         }
     }
 
-    @Override
     public void createLayout() {
         this.container.clearChildren();
         float titleWidth = 36.0f * this.SCREEN_UNIT;

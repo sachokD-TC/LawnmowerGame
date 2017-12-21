@@ -44,6 +44,7 @@ public class GameScreen implements Screen {
     private FieldLine currentLine;
     private LevelTypeMetaData levelTypeMetaData;
     private boolean isStopped = false;
+    private boolean isFailed = false;
 
 
     public GameScreen(MainClass mainClass, LevelTypeMetaData levelPackMetaData, int levelInd) {
@@ -54,6 +55,7 @@ public class GameScreen implements Screen {
         this.currentLevel = Assets.levelsList.get(this.boardSize).getLevels().get(this.levelInd - 1);
         this.currentLevel.setPassedLines(new ArrayList<FieldLine>());
         this.currentLevel.setPassedPoints(new ArrayList<FieldPoint>());
+        Gdx.graphics.setContinuousRendering(true);
         show();
     }
 
@@ -122,7 +124,6 @@ public class GameScreen implements Screen {
                           backToMenu();
                         }
                     }, Assets.DELAY_TIME_IN_SECONDS);
-
                 }
                 if (currentLine.getEnd() != null) {
                     currentLevel.addLineToPassedLines(currentLine);

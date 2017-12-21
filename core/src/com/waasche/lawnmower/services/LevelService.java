@@ -4,10 +4,7 @@ package com.waasche.lawnmower.services;
 import com.waasche.lawnmower.data.*;
 import com.waasche.lawnmower.resources.Assets;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class LevelService {
 
@@ -63,6 +60,7 @@ public class LevelService {
         for (Integer levelType : levelTypesSet) {
             levelTypes.add(new LevelTypeMetaData(levelType, "Level" + levelType, "easyHint",  Assets.levelsList.get(levelType).getLevels().size(), Assets.createColor(random.nextInt(), random.nextInt(), random.nextInt())));
         }
+        Collections.sort(levelTypes);
         return levelTypes;
     }
 }

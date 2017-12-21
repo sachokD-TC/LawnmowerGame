@@ -3,14 +3,14 @@ package com.waasche.lawnmower.data;
 import com.badlogic.gdx.graphics.Color;
 import com.waasche.lawnmower.services.LevelService;
 
-public class LevelTypeMetaData {
+public class LevelTypeMetaData implements Comparable {
     private Color color;
     private int id;
     private String subtitle;
     private String title;
     private int totalLevels;
 
-    public LevelTypeMetaData(int id, String title, String subtitle, int totalLevels, Color color) {
+    public LevelTypeMetaData(int id, String title, String subtitle, int totalLevels, Color color)  {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -44,5 +44,13 @@ public class LevelTypeMetaData {
 
     public Color getColor() {
         return this.color;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof LevelTypeMetaData){
+            return this.getId() - ((LevelTypeMetaData) o ).getId();
+        }
+        return 0;
     }
 }

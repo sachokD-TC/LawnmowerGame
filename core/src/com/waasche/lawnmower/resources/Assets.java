@@ -21,11 +21,9 @@ public class Assets {
 
     public static final float SCALE_X = 1f;
     public static final float SCALE_Y = 1f;
-    public static final float LOCK_WIDTH = 100f;
-    public static final float LOCK_HEIGHT = 100f;
     public static final float ANDROID_WIDTH = Gdx.graphics.getWidth();
     public static final float ANDROID_HEIGHT = Gdx.graphics.getHeight();
-    public static final long DELAY_TIME_IN_SECONDS = 2;
+    public static final long DELAY_TIME_IN_SECONDS = 1;
     public static Lawnmower lawnmowerUpRight;
     public static Color colorBackground;
     public static Color colorButtonLevelIncomplete;
@@ -33,8 +31,6 @@ public class Assets {
     public static final Texture lawnmowerUpLeftTexture =  new Texture("actor/up-left.png");
     public static final Texture lawnmowerDownRightTexture = new Texture("actor/down-right.png");
     public static final Texture lawnmowerDownLeftTexture = new Texture("actor/down-left.png");
-    public static Sprite lockClosed;
-    public static Sprite lockOpen;
     public static Sprite grassFull;
     public static Sprite grassEmpty;
     public static Sprite wallSprite;
@@ -72,12 +68,11 @@ public class Assets {
         wallSprite = new Sprite(new Texture(Gdx.files.internal("data/wall.png")));
         spriteTitle = createSprite("menu/title.png");
         spriteStart = createSprite("actor/ic_launcher.png");
-        lockOpen = createSprite("menu/lock_open.png");
-        lockClosed = createSprite("menu/lock_closed.png");
-        lockClosed.setSize(LOCK_WIDTH, LOCK_HEIGHT);
         levelsList.put(4, new Level("levels/levels4.json").getLevelsList());
         levelsList.put(5, new Level("levels/levels5.json").getLevelsList());
         levelsList.put(6, new Level("levels/levels6.json").getLevelsList());
+        levelsList.put(7, new Level("levels/levels7.json").getLevelsList());
+        levelsList.put(8, new Level("levels/levels8.json").getLevelsList());
         wallColor = new Color(1, 0, 0, 1);
         textStyle = new Label.LabelStyle();
         textStyle.font = new BitmapFont();

@@ -56,6 +56,7 @@ public class LevelSelectScreen extends MenuScreen implements Screen {
     }
 
     protected void orientationChange() {
+        super.orientationChange();
         createLayout();
     }
 
