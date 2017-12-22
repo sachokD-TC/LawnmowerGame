@@ -1,12 +1,15 @@
 package com.waasche.lawnmower.services;
 
 
+import com.badlogic.gdx.graphics.Color;
 import com.waasche.lawnmower.data.*;
 import com.waasche.lawnmower.resources.Assets;
 
 import java.util.*;
 
 public class LevelService {
+
+    public static Color[] colors = {Color.LIGHT_GRAY, Color.BLUE, Color.CORAL, Color.BROWN, Color.CYAN, Color.FIREBRICK, Color.FOREST, Color.GOLD, Color.MAGENTA, Color.CHARTREUSE};
 
     public static boolean isWall(Level level, FieldPoint point) {
         List<FieldPoint> walls = level.getWalls();
@@ -58,7 +61,7 @@ public class LevelService {
         List<LevelTypeMetaData> levelTypes = new ArrayList<LevelTypeMetaData>();
         Set<Integer> levelTypesSet = Assets.levelsList.keySet();
         for (Integer levelType : levelTypesSet) {
-            levelTypes.add(new LevelTypeMetaData(levelType, "Level" + levelType, "easyHint",  Assets.levelsList.get(levelType).getLevels().size(), Assets.createColor(random.nextInt(), random.nextInt(), random.nextInt())));
+            levelTypes.add(new LevelTypeMetaData(levelType, "Level" + levelType, "easyHint",  Assets.levelsList.get(levelType).getLevels().size(), colors[levelType]));
         }
         Collections.sort(levelTypes);
         return levelTypes;

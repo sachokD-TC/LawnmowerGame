@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.waasche.lawnmower.controller.MenuInputProcessor;
 import com.waasche.lawnmower.data.UserSettings;
 import com.waasche.lawnmower.main.MainClass;
@@ -34,6 +35,12 @@ public class StartScreen  extends MenuScreen implements Screen {
                 mainClass.setCurrentScreen(new MainMenuScreen(mainClass));
             }
         });
+        this.buttonHelp.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                Sounds.playButtonClick(0.0f);
+                mainClass.setCurrentScreen(new HelpScreen(mainClass));
+            }
+        });
         createLayout();
         inputMultiplexer.addProcessor(new MenuInputProcessor(this, mainClass));
         inputMultiplexer.addProcessor(this.stage);
@@ -53,17 +60,15 @@ public class StartScreen  extends MenuScreen implements Screen {
 
     public void createLayout() {
         this.container.clearChildren();
-        float titleWidth = 36.0f * this.SCREEN_UNIT;
+        float titleWidth = 72.0f * this.SCREEN_UNIT;
         float titleHeight = (this.imageTitle.getHeight() * titleWidth) / this.imageTitle.getWidth();
         if (isLandscape()) {
-            this.container.add(this.imageTitle).size(titleWidth, titleHeight).colspan(2).align(8).pad(this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, 0.0f, 0.0f).expandX();
-            this.container.add(this.buttonSound).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(this.SCREEN_UNIT * 4.0f, 0.0f, 0.0f, this.SCREEN_UNIT * 4.0f);
+            this.container.add(this.imageTitle).size(titleWidth, titleHeight).colspan(2).align(Align.center).pad(this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, 0.0f, 0.0f);
             this.container.row();
             this.container.add(this.buttonPlay).colspan(3).expand();
             this.container.row();
-            this.container.add(this.buttonHelp).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(0.0f, this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, 0.0f);
-            this.container.add().expandX();
-            this.container.add(this.buttonSettings).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(0.0f, 0.0f, this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f);
+            this.container.add(this.buttonHelp).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f);
+            this.container.add(this.buttonSound).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f);
             return;
         }
         this.container.add(this.imageTitle).size(titleWidth, titleHeight).colspan(3).padTop(this.SCREEN_UNIT * 4.0f).expandX();

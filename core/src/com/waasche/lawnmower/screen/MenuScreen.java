@@ -52,6 +52,8 @@ public abstract class MenuScreen implements Screen {
         this.skin.add("darkLarge", new Label.LabelStyle(this.skin.getFont("large"), Assets.colorBackground));
         this.skin.add("darkSmall", new Label.LabelStyle(this.skin.getFont("small"), Assets.colorBackground));
         this.skin.add("buttonBack", Assets.spriteButtonBack, Sprite.class);
+        this.skin.add("buttonRate", Assets.spriteButtonRate, Sprite.class);
+        this.skin.add("buttonTutorial", Assets.spriteButtonTutorial, Sprite.class);
         this.skin.add("buttonHelp", Assets.spriteButtonHelp, Sprite.class);
         this.skin.add("iconStar", Assets.spriteIconStar, Sprite.class);
         this.skin.add("title", Assets.spriteTitle, Sprite.class);

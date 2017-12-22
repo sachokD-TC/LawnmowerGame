@@ -58,6 +58,10 @@ public class Assets {
     public static Sound soundTick;
     public static Sound soundCrash;
     public static final int VIBRATE_MSEC = 500;
+    public static Sprite spriteLogoWaasche;
+    public static Sprite spriteLogoLibGdx;
+    public static Sprite spriteButtonTutorial;
+    public static Sprite spriteButtonRate;
 
 
     public static void load() {
@@ -67,7 +71,11 @@ public class Assets {
         grassEmpty = new Sprite(new Texture(Gdx.files.internal("data/grass-empty.png")));
         wallSprite = new Sprite(new Texture(Gdx.files.internal("data/wall.png")));
         spriteTitle = createSprite("menu/title.png");
-        spriteStart = createSprite("actor/ic_launcher.png");
+        spriteStart = createSprite("menu/start.png");
+        spriteLogoWaasche = createSprite("menu/waasche.png");
+        spriteLogoLibGdx = createSprite("menu/logo_libgdx.jpg");
+        spriteButtonRate = createSprite("menu/rate.png");
+        spriteButtonTutorial = createSprite("menu/tutorial.jpg");
         levelsList.put(4, new Level("levels/levels4.json").getLevelsList());
         levelsList.put(5, new Level("levels/levels5.json").getLevelsList());
         levelsList.put(6, new Level("levels/levels6.json").getLevelsList());
