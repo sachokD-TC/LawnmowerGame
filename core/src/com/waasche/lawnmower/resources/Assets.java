@@ -43,7 +43,7 @@ public class Assets {
     public static BitmapFont fontSmall;
     private static float fontScale;
     public static I18NBundle strings;
-    public static Sprite spriteIconStar;
+    public static Sprite spriteButtonOk;
     public static Sprite spriteTitle;
     public static Sprite spriteStart;
     public static Sprite spriteButtonBack;
@@ -62,6 +62,9 @@ public class Assets {
     public static Sprite spriteLogoLibGdx;
     public static Sprite spriteButtonTutorial;
     public static Sprite spriteButtonRate;
+    public static Sprite spriteButtonArrowLeft;
+    public static Sprite spriteButtonArrowRight;
+    public static Sprite[] spritesTutorial;
 
 
     public static void load() {
@@ -76,6 +79,12 @@ public class Assets {
         spriteLogoLibGdx = createSprite("menu/logo_libgdx.jpg");
         spriteButtonRate = createSprite("menu/rate.png");
         spriteButtonTutorial = createSprite("menu/tutorial.jpg");
+        spriteButtonArrowLeft = createSprite("menu/buttonArrowLeft.png");
+        spriteButtonArrowRight = createSprite("menu/buttonArrowRight.png");
+        spritesTutorial = new Sprite[3];
+        spritesTutorial[0] = createSprite("menu/tutorial0.png");
+        spritesTutorial[1] = createSprite("menu/tutorial1.png");
+        spritesTutorial[2] = createSprite("menu/tutorial2.png");
         levelsList.put(4, new Level("levels/levels4.json").getLevelsList());
         levelsList.put(5, new Level("levels/levels5.json").getLevelsList());
         levelsList.put(6, new Level("levels/levels6.json").getLevelsList());
@@ -88,7 +97,7 @@ public class Assets {
         fontScale = 0.0f;
         strings = I18NBundle.createBundle(com.waasche.lawnmower.resources.AssetLoader.getInternalFileHandler("strings/strings"));
         colorText = createColor(255, 255, 255);
-        spriteIconStar = createSprite("menu/ok.png");
+        spriteButtonOk = createSprite("menu/ok.png");
         spriteButtonBack = createSprite("menu/back_button.png");
         spriteButtonHelp = createSprite("menu/help_button.png");
         spriteButtonSoundOn = createSprite("menu/sound_on.png");

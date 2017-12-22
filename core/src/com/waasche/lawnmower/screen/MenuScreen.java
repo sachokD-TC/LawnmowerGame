@@ -55,7 +55,9 @@ public abstract class MenuScreen implements Screen {
         this.skin.add("buttonRate", Assets.spriteButtonRate, Sprite.class);
         this.skin.add("buttonTutorial", Assets.spriteButtonTutorial, Sprite.class);
         this.skin.add("buttonHelp", Assets.spriteButtonHelp, Sprite.class);
-        this.skin.add("iconStar", Assets.spriteIconStar, Sprite.class);
+        this.skin.add("buttonOk", Assets.spriteButtonOk, Sprite.class);
+        this.skin.add("buttonArrowLeft", Assets.spriteButtonArrowLeft, Sprite.class);
+        this.skin.add("buttonArrowRight", Assets.spriteButtonArrowRight, Sprite.class);
         this.skin.add("title", Assets.spriteTitle, Sprite.class);
         this.skin.add("start", Assets.spriteStart, Sprite.class);
         this.skin.add("buttonSoundOn", Assets.spriteButtonSoundOn, Sprite.class);

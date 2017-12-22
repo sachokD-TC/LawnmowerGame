@@ -31,14 +31,14 @@ public class LevelTypeActor extends Table {
     }
 
     private Actor createIconStar() {
-        Actor iconStarBase = new Image(this.skin.getDrawable("iconStar"));
+        Actor iconStarBase = new Image(this.skin.getDrawable("buttonOk"));
         iconStarBase.setSize(this.size / 1.8f, this.size / 1.8f);
         if (!this.metaData.isCompleted()) {
             return iconStarBase;
         }
         Group iconStar = new Group();
         iconStar.addActor(iconStarBase);
-        Image iconStarFill = new Image(this.skin.getDrawable("iconStar"));
+        Image iconStarFill = new Image(this.skin.getDrawable("buttonOk"));
         iconStarFill.setSize(this.size / 1.8f, this.size / 1.8f);
         iconStar.addActor(iconStarFill);
         return iconStar;
