@@ -78,7 +78,7 @@ public class Assets {
         spriteLogoWaasche = createSprite("menu/waasche.png");
         spriteLogoLibGdx = createSprite("menu/logo_libgdx.jpg");
         spriteButtonRate = createSprite("menu/rate.png");
-        spriteButtonTutorial = createSprite("menu/tutorial.jpg");
+        spriteButtonTutorial = createSprite("menu/tutorial.png");
         spriteButtonArrowLeft = createSprite("menu/buttonArrowLeft.png");
         spriteButtonArrowRight = createSprite("menu/buttonArrowRight.png");
         spritesTutorial = new Sprite[3];
