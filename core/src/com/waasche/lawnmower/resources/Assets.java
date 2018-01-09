@@ -21,6 +21,7 @@ public class Assets {
 
     public static final float SCALE_X = 1f;
     public static final float SCALE_Y = 1f;
+    public static final float SCREEN_UNIT = (((float) Math.min(Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight())) / 60.0f);
     public static final float ANDROID_WIDTH = Gdx.graphics.getWidth();
     public static final float ANDROID_HEIGHT = Gdx.graphics.getHeight();
     public static final long DELAY_TIME_IN_SECONDS = 1;

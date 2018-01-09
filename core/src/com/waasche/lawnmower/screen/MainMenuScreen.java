@@ -37,7 +37,7 @@ public class MainMenuScreen extends MenuScreen implements Screen {
             this.skin.add("buttonLevelPack_" + levelTypeMetaData.getId(), new Texture(pixmap));
         }
         pixmap.dispose();
-        pixmap = new Pixmap((int) this.SCREEN_UNIT, 1, Pixmap.Format.RGBA8888);
+        pixmap = new Pixmap((int) Assets.SCREEN_UNIT, 1, Pixmap.Format.RGBA8888);
         pixmap.setColor(Assets.colorText);
         pixmap.fill();
         this.skin.add("scrollKnob", new Texture(pixmap));
@@ -74,29 +74,29 @@ public class MainMenuScreen extends MenuScreen implements Screen {
         this.container.clearChildren();
         for (int i=0; i!=levelTypeMetaDataList.size(); i++) {
             float f;
-            Actor levelPackActor = new LevelTypeActor(levelTypeMetaDataList.get(i), this.skin, this.SCREEN_UNIT * 13.5f);
+            Actor levelPackActor = new LevelTypeActor(levelTypeMetaDataList.get(i), this.skin, Assets.SCREEN_UNIT * 13.5f);
             levelPackActor.addListener(new LevelPackClickListener(levelPackActor));
             Cell width = this.list.add(levelPackActor).width(calcListWidth());
-            float f2 = this.SCREEN_UNIT * 2.0f;
+            float f2 = Assets.SCREEN_UNIT * 2.0f;
             if (i < this.levelTypeMetaDataList.size() - 1) {
-                f = this.SCREEN_UNIT * 1.5f;
+                f = Assets.SCREEN_UNIT * 1.5f;
             } else {
                 f = 0.0f;
             }
-            width.pad(0.0f, f2, f, this.SCREEN_UNIT * 2.0f);
+            width.pad(0.0f, f2, f, Assets.SCREEN_UNIT * 2.0f);
             this.list.row();
         }
         this.list.setWidth(calcListWidth());
         this.scroll.setScrollingDisabled(true, false);
-        this.container.add(new Label(Assets.strings.get("levelPackHint"), this.skin, "lightMedium")).height(this.SCREEN_UNIT * 10.0f).padBottom(this.SCREEN_UNIT * 2.0f).expandX();
+        this.container.add(new Label(Assets.strings.get("levelPackHint"), this.skin, "lightMedium")).height(Assets.SCREEN_UNIT * 10.0f).padBottom(Assets.SCREEN_UNIT * 2.0f).expandX();
         this.container.row();
-        this.container.add(this.scroll).padBottom(isLandscape() ? -9.0f * this.SCREEN_UNIT : 0.0f).expand();
+        this.container.add(this.scroll).padBottom(isLandscape() ? -9.0f * Assets.SCREEN_UNIT : 0.0f).expand();
         this.container.row();
-        //this.container.add(this.buttonBack).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, 0.0f).align(8);
+        //this.container.add(this.buttonBack).size(Assets.SCREEN_UNIT * 10.0f, Assets.SCREEN_UNIT * 10.0f).pad(Assets.SCREEN_UNIT * 4.0f, Assets.SCREEN_UNIT * 4.0f, Assets.SCREEN_UNIT * 4.0f, 0.0f).align(8);
     }
 
     private float calcListWidth() {
-        return Math.min(((float) Gdx.app.getGraphics().getWidth()) - (this.SCREEN_UNIT * 8.0f), this.SCREEN_UNIT * 60.0f);
+        return Math.min(((float) Gdx.app.getGraphics().getWidth()) - (Assets.SCREEN_UNIT * 8.0f), Assets.SCREEN_UNIT * 60.0f);
     }
 
 

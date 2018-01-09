@@ -23,7 +23,6 @@ import java.util.List;
 
 public abstract class MenuScreen implements Screen {
 
-    protected final float SCREEN_UNIT = (((float) Math.min(Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight())) / 60.0f);
     protected List<LevelTypeMetaData> levelTypeMetaDataList = LevelService.listLevelPacks();
     public MainClass mainClass = null;
     protected Table container;
@@ -35,7 +34,7 @@ public abstract class MenuScreen implements Screen {
 
 
     public MenuScreen(MainClass mainClass, int levelInd) {
-        Assets.updateFont(this.SCREEN_UNIT / 5.0f);
+        Assets.updateFont(Assets.SCREEN_UNIT / 5.0f);
         this.mainClass = mainClass;
         this.levelInd = levelInd;
         this.container = new Table();
@@ -62,7 +61,7 @@ public abstract class MenuScreen implements Screen {
         this.skin.add("start", Assets.spriteStart, Sprite.class);
         this.skin.add("buttonSoundOn", Assets.spriteButtonSoundOn, Sprite.class);
         this.skin.add("buttonSoundOff", Assets.spriteButtonSoundOff, Sprite.class);
-        Assets.updateFont(this.SCREEN_UNIT / 5.0f);
+        Assets.updateFont(Assets.SCREEN_UNIT / 5.0f);
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(new MenuInputProcessor(this, mainClass));
         inputMultiplexer.addProcessor(this.stage);

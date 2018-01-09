@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Align;
 import com.waasche.lawnmower.controller.MenuInputProcessor;
 import com.waasche.lawnmower.data.UserSettings;
 import com.waasche.lawnmower.main.MainClass;
+import com.waasche.lawnmower.resources.Assets;
 import com.waasche.lawnmower.resources.Sounds;
 import com.waasche.lawnmower.view.MenuButtonActor;
 
@@ -18,7 +19,7 @@ import com.waasche.lawnmower.view.MenuButtonActor;
  * Created by sadm on 12/8/2017.
  */
 public class StartScreen  extends MenuScreen implements Screen {
-    private MenuButtonActor buttonHelp = new MenuButtonActor(this, this.skin.getDrawable("buttonHelp"), this.SCREEN_UNIT * 10.0f);
+    private MenuButtonActor buttonHelp = new MenuButtonActor(this, this.skin.getDrawable("buttonHelp"), Assets.SCREEN_UNIT * 10.0f);
     private Actor buttonPlay;
     private MenuButtonActor buttonSettings;
     private MenuButtonActor buttonSound;
@@ -27,7 +28,7 @@ public class StartScreen  extends MenuScreen implements Screen {
 
     public StartScreen(final MainClass mainClass) {
         super(mainClass, -1);
-        this.buttonSound = new MenuButtonActor(this, this.skin.getDrawable(UserSettings.isSoundOn() ? "buttonSoundOn" : "buttonSoundOff"), this.SCREEN_UNIT * 10.0f);
+        this.buttonSound = new MenuButtonActor(this, this.skin.getDrawable(UserSettings.isSoundOn() ? "buttonSoundOn" : "buttonSoundOff"), Assets.SCREEN_UNIT * 10.0f);
         this.buttonPlay = new Image(this.skin.getDrawable("start"));
         this.buttonPlay.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -60,23 +61,23 @@ public class StartScreen  extends MenuScreen implements Screen {
 
     public void createLayout() {
         this.container.clearChildren();
-        float titleWidth = 72.0f * this.SCREEN_UNIT;
+        float titleWidth = 72.0f * Assets.SCREEN_UNIT;
         float titleHeight = (this.imageTitle.getHeight() * titleWidth) / this.imageTitle.getWidth();
         if (isLandscape()) {
-            this.container.add(this.imageTitle).size(titleWidth, titleHeight).colspan(2).align(Align.center).pad(this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, 0.0f, 0.0f);
+            this.container.add(this.imageTitle).size(titleWidth, titleHeight).colspan(2).align(Align.center).pad(Assets.SCREEN_UNIT * 4.0f, Assets.SCREEN_UNIT * 4.0f, 0.0f, 0.0f);
             this.container.row();
             this.container.add(this.buttonPlay).colspan(3).expand();
             this.container.row();
-            this.container.add(this.buttonHelp).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f);
-            this.container.add(this.buttonSound).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f);
+            this.container.add(this.buttonHelp).size(Assets.SCREEN_UNIT * 10.0f, Assets.SCREEN_UNIT * 10.0f);
+            this.container.add(this.buttonSound).size(Assets.SCREEN_UNIT * 10.0f, Assets.SCREEN_UNIT * 10.0f);
             return;
         }
-        this.container.add(this.imageTitle).size(titleWidth, titleHeight).colspan(3).padTop(this.SCREEN_UNIT * 4.0f).expandX();
+        this.container.add(this.imageTitle).size(titleWidth, titleHeight).colspan(3).padTop(Assets.SCREEN_UNIT * 4.0f).expandX();
         this.container.row();
-        this.container.add(this.buttonPlay).size(titleWidth, titleHeight).colspan(3).padTop(this.SCREEN_UNIT * 4.0f).expandX();
+        this.container.add(this.buttonPlay).size(titleWidth, titleHeight).colspan(3).padTop(Assets.SCREEN_UNIT * 4.0f).expandX();
         this.container.row();
-        this.container.add(this.buttonHelp).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(0.0f, this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, 0.0f);
-        this.container.add(this.buttonSound).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(0.0f, 0.0f, this.SCREEN_UNIT * 4.0f, 0.0f).expandX();
-        this.container.add(this.buttonSettings).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(0.0f, 0.0f, this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f);
+        this.container.add(this.buttonHelp).size(Assets.SCREEN_UNIT * 10.0f, Assets.SCREEN_UNIT * 10.0f).pad(0.0f, Assets.SCREEN_UNIT * 4.0f, Assets.SCREEN_UNIT * 4.0f, 0.0f);
+        this.container.add(this.buttonSound).size(Assets.SCREEN_UNIT * 10.0f, Assets.SCREEN_UNIT * 10.0f).pad(0.0f, 0.0f, Assets.SCREEN_UNIT * 4.0f, 0.0f).expandX();
+        this.container.add(this.buttonSettings).size(Assets.SCREEN_UNIT * 10.0f, Assets.SCREEN_UNIT * 10.0f).pad(0.0f, 0.0f, Assets.SCREEN_UNIT * 4.0f, Assets.SCREEN_UNIT * 4.0f);
     }
 }

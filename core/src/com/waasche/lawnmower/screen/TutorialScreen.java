@@ -34,10 +34,10 @@ public class TutorialScreen extends MenuScreen implements Screen {
         this.tutorialText = new Label("", this.skin, "lightSmall");
         this.tutorialText.setWrap(true);
         this.tutorialText.setAlignment(1);
-        this.buttonBack = new MenuButtonActor(this, this.skin.getDrawable("buttonBack"), this.SCREEN_UNIT * 10.0f);
-        this.buttonDone = new MenuButtonActor(this, this.skin.getDrawable("buttonOk"), this.SCREEN_UNIT * 10.0f);
-        this.buttonPrev = new MenuButtonActor(this, this.skin.getDrawable("buttonArrowLeft"), this.SCREEN_UNIT * 7.5f);
-        this.buttonNext = new MenuButtonActor(this, this.skin.getDrawable("buttonArrowRight"), this.SCREEN_UNIT * 7.5f);
+        this.buttonBack = new MenuButtonActor(this, this.skin.getDrawable("buttonBack"), Assets.SCREEN_UNIT  * 10.0f);
+        this.buttonDone = new MenuButtonActor(this, this.skin.getDrawable("buttonOk"), Assets.SCREEN_UNIT  * 10.0f);
+        this.buttonPrev = new MenuButtonActor(this, this.skin.getDrawable("buttonArrowLeft"), Assets.SCREEN_UNIT  * 7.5f);
+        this.buttonNext = new MenuButtonActor(this, this.skin.getDrawable("buttonArrowRight"), Assets.SCREEN_UNIT  * 7.5f);
         this.content = new Table();
         createLayout();
         show();
@@ -47,11 +47,11 @@ public class TutorialScreen extends MenuScreen implements Screen {
     private void createLayout() {
         this.content.clearChildren();
         this.container.clearChildren();
-        this.content.add(this.buttonPrev).size(this.SCREEN_UNIT * 7.5f, this.SCREEN_UNIT * 7.5f).pad(0.0f, 2.0f * this.SCREEN_UNIT, 0.0f, 0.0f).align(8);
-        this.content.add(this.tutorialImage).size(41.0f * this.SCREEN_UNIT, 41.0f * this.SCREEN_UNIT).expandX();
-        this.content.add(this.buttonNext).size(this.SCREEN_UNIT * 7.5f, this.SCREEN_UNIT * 7.5f).pad(0.0f, 0.0f, 0.0f, 2.0f * this.SCREEN_UNIT).align(16);
+        this.content.add(this.buttonPrev).size(Assets.SCREEN_UNIT  * 7.5f, Assets.SCREEN_UNIT  * 7.5f).pad(0.0f, 2.0f * Assets.SCREEN_UNIT , 0.0f, 0.0f).align(8);
+        this.content.add(this.tutorialImage).size(41.0f * Assets.SCREEN_UNIT , 41.0f * Assets.SCREEN_UNIT ).expandX();
+        this.content.add(this.buttonNext).size(Assets.SCREEN_UNIT  * 7.5f, Assets.SCREEN_UNIT  * 7.5f).pad(0.0f, 0.0f, 0.0f, 2.0f * Assets.SCREEN_UNIT ).align(16);
         this.content.row();
-        this.content.add(this.tutorialText).size(52.0f * this.SCREEN_UNIT, 15.0f * this.SCREEN_UNIT).padBottom(this.SCREEN_UNIT * 4.0f).align(2).expandY().colspan(3);
+        this.content.add(this.tutorialText).size(52.0f * Assets.SCREEN_UNIT , 15.0f * Assets.SCREEN_UNIT ).padBottom(Assets.SCREEN_UNIT  * 4.0f).align(2).expandY().colspan(3);
         this.content.row();
         if (isLandscape()) {
             this.container.add(this.content).expand().align(2).colspan(3);
@@ -59,9 +59,9 @@ public class TutorialScreen extends MenuScreen implements Screen {
             this.container.add(this.content).expand().colspan(3);
         }
         this.container.row();
-        this.container.add(this.buttonBack).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(0.0f, this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, 0.0f);
+        this.container.add(this.buttonBack).size(Assets.SCREEN_UNIT  * 10.0f, Assets.SCREEN_UNIT  * 10.0f).pad(0.0f, Assets.SCREEN_UNIT  * 4.0f, Assets.SCREEN_UNIT  * 4.0f, 0.0f);
         this.container.add().expandX();
-        this.container.add(this.buttonDone).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(0.0f, 0.0f, this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f);
+        this.container.add(this.buttonDone).size(Assets.SCREEN_UNIT  * 10.0f, Assets.SCREEN_UNIT  * 10.0f).pad(0.0f, 0.0f, Assets.SCREEN_UNIT  * 4.0f, Assets.SCREEN_UNIT  * 4.0f);
     }
 
     private void prevPage() {

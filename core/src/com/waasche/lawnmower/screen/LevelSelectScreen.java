@@ -42,7 +42,7 @@ public class LevelSelectScreen extends MenuScreen implements Screen {
         pixmap.fill();
         this.skin.add("buttonLevelComplete", new Texture(pixmap));
         pixmap.dispose();
-        this.buttonBack = new MenuButtonActor(this, this.skin.getDrawable("buttonBack"), 10.0f * this.SCREEN_UNIT);
+        this.buttonBack = new MenuButtonActor(this, this.skin.getDrawable("buttonBack"), 10.0f * Assets.SCREEN_UNIT);
         this.levelGrid = new Table();
     }
 
@@ -70,27 +70,27 @@ public class LevelSelectScreen extends MenuScreen implements Screen {
         float f;
         this.container.clearChildren();
         fillLevelGrid();
-        this.container.add(new Label(Assets.strings.get(this.levelPackMetaData.getTitle()), this.skin, "lightLarge")).height(8.0f * this.SCREEN_UNIT).padTop(2.0f * this.SCREEN_UNIT).expandX();
+        this.container.add(new Label(Assets.strings.get(this.levelPackMetaData.getTitle()), this.skin, "lightLarge")).height(8.0f * Assets.SCREEN_UNIT).padTop(2.0f * Assets.SCREEN_UNIT).expandX();
         this.container.row();
-        this.container.add(new Label(Assets.strings.get(this.levelPackMetaData.getSubtitle()), this.skin, "lightSmall")).height(3.0f * this.SCREEN_UNIT).expandX();
+        this.container.add(new Label(Assets.strings.get(this.levelPackMetaData.getSubtitle()), this.skin, "lightSmall")).height(3.0f * Assets.SCREEN_UNIT).expandX();
         this.container.row();
         Cell add = this.container.add(this.levelGrid);
         if (isLandscape()) {
-            f = -5.0f * this.SCREEN_UNIT;
+            f = -5.0f * Assets.SCREEN_UNIT;
         } else {
             f = 0.0f;
         }
         add.padBottom(f).expand();
         this.container.row();
-        this.container.add(this.buttonBack).size(this.SCREEN_UNIT * 10.0f, this.SCREEN_UNIT * 10.0f).pad(0.0f, this.SCREEN_UNIT * 4.0f, this.SCREEN_UNIT * 4.0f, 0.0f).align(8);
+        this.container.add(this.buttonBack).size(Assets.SCREEN_UNIT * 10.0f, Assets.SCREEN_UNIT * 10.0f).pad(0.0f, Assets.SCREEN_UNIT * 4.0f, Assets.SCREEN_UNIT * 4.0f, 0.0f).align(8);
     }
 
     private void fillLevelGrid() {
         int columns = isLandscape() ? 9 : 6;
         for (Level level : levelsMetaData) {
-            Actor levelActor = new LevelActor(this.levelPackMetaData, level, this.skin, this.SCREEN_UNIT * 6.0f);
+            Actor levelActor = new LevelActor(this.levelPackMetaData, level, this.skin, Assets.SCREEN_UNIT * 6.0f);
             levelActor.addListener(new LevelClickListener(levelActor, this.levelPackMetaData));
-            this.levelGrid.add(levelActor).pad(this.SCREEN_UNIT * 0.75f);
+            this.levelGrid.add(levelActor).pad(Assets.SCREEN_UNIT * 0.75f);
             if ((levelsMetaData.indexOf(level) + 1) % columns == 0) {
                 this.levelGrid.row();
             }

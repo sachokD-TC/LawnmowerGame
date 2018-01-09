@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Timer;
 import com.waasche.lawnmower.controller.LawnmowerCameraController;
 import com.waasche.lawnmower.data.*;
@@ -44,7 +45,8 @@ public class GameScreen implements Screen {
     private FieldLine currentLine;
     private LevelTypeMetaData levelTypeMetaData;
     private boolean isStopped = false;
-    private boolean isFailed = false;
+    private Label levelLabel;
+    private Label movesCount;
 
 
     public GameScreen(MainClass mainClass, LevelTypeMetaData levelPackMetaData, int levelInd) {
@@ -56,6 +58,8 @@ public class GameScreen implements Screen {
         this.currentLevel.setPassedLines(new ArrayList<FieldLine>());
         this.currentLevel.setPassedPoints(new ArrayList<FieldPoint>());
         Gdx.graphics.setContinuousRendering(true);
+        levelLabel = new Label(Assets.strings.get("level") + " " + levelTypeMetaData.getId() + "-" + levelInd, Assets.textStyle);
+        movesCount = new Label(Assets.strings.get("moves") + " 0", Assets.textStyle);
         show();
     }
 
@@ -116,6 +120,7 @@ public class GameScreen implements Screen {
                 currentLine.addPoint(movePosition);
                 currentLevel.addPassedPoints(movePosition);
                 lawnmower.setLawnmowerPosition(movePosition);
+                movesCount.setText(Assets.strings.get("moves") + " " + currentLevel.getPassedPoints().size());
                 if (LevelService.isFail(currentLevel, currentLine)) {
                     Sounds.playCrashSound(0.1f);
                     Timer.schedule(new Timer.Task() {
@@ -148,6 +153,9 @@ public class GameScreen implements Screen {
         cam.update();
         bgBatch.begin();
         Assets.spriteBackground.draw(bgBatch);
+        levelLabel.draw(bgBatch, 1f);
+        movesCount.setPosition(Assets.ANDROID_HEIGHT - Assets.SCREEN_UNIT, 0.0f);
+        movesCount.draw(bgBatch,1f);
         bgBatch.end();
         fieldSpritesBatch.setProjectionMatrix(cam.combined);
         fieldSpritesBatch.setTransformMatrix(matrix);
