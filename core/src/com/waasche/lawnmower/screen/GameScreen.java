@@ -47,6 +47,7 @@ public class GameScreen implements Screen {
     private boolean isStopped = false;
     private Label levelLabel;
     private Label movesCount;
+    private Label scoresLabel;
 
 
     public GameScreen(MainClass mainClass, LevelTypeMetaData levelPackMetaData, int levelInd) {
@@ -58,8 +59,9 @@ public class GameScreen implements Screen {
         this.currentLevel.setPassedLines(new ArrayList<FieldLine>());
         this.currentLevel.setPassedPoints(new ArrayList<FieldPoint>());
         Gdx.graphics.setContinuousRendering(true);
-        levelLabel = new Label(Assets.strings.get("level") + " " + levelTypeMetaData.getId() + "-" + levelInd, Assets.textStyle);
+        levelLabel = new Label(Assets.strings.get("level") + " " + levelTypeMetaData.getId() + "/" + levelInd, Assets.textStyle);
         movesCount = new Label(Assets.strings.get("moves") + " 0", Assets.textStyle);
+        scoresLabel = new Label(Assets.strings.get("scores") + " 0", Assets.textStyle);
         show();
     }
 
@@ -121,6 +123,7 @@ public class GameScreen implements Screen {
                 currentLevel.addPassedPoints(movePosition);
                 lawnmower.setLawnmowerPosition(movePosition);
                 movesCount.setText(Assets.strings.get("moves") + " " + currentLevel.getPassedPoints().size());
+                scoresLabel.setText(Assets.strings.get("scores") + " " + currentLevel.getPassedPoints().size()*124);
                 if (LevelService.isFail(currentLevel, currentLine)) {
                     Sounds.playCrashSound(0.1f);
                     Timer.schedule(new Timer.Task() {
@@ -155,7 +158,9 @@ public class GameScreen implements Screen {
         Assets.spriteBackground.draw(bgBatch);
         levelLabel.draw(bgBatch, 1f);
         movesCount.setPosition(Assets.ANDROID_HEIGHT - Assets.SCREEN_UNIT, 0.0f);
-        movesCount.draw(bgBatch,1f);
+        scoresLabel.setPosition(0f, Assets.SCREEN_UNIT*2f);
+        movesCount.draw(bgBatch, 1f);
+        scoresLabel.draw(bgBatch,1f);
         bgBatch.end();
         fieldSpritesBatch.setProjectionMatrix(cam.combined);
         fieldSpritesBatch.setTransformMatrix(matrix);

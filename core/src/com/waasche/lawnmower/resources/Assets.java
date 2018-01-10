@@ -107,7 +107,7 @@ public class Assets {
         colorButtonLevelIncomplete = createColor(50, 50, 50);
         soundClick = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/click.ogg"));
         soundLwMove = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/lwmove.mp3"));
-        soundTick = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/tick.mp3"));
+        soundTick = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/tick.wav"));
         soundCrash = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/crash.mp3"));
     }
 
