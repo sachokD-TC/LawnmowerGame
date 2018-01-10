@@ -76,7 +76,7 @@ public class Assets {
         wallSprite = new Sprite(new Texture(Gdx.files.internal("data/wall.png")));
         spriteTitle = createSprite("menu/title.png");
         spriteStart = createSprite("menu/start.png");
-        spriteLogoWaasche = createSprite("menu/waasche.png");
+        spriteLogoWaasche = createSprite("menu/Waasche.png");
         spriteLogoLibGdx = createSprite("menu/logo_libgdx.jpg");
         spriteButtonRate = createSprite("menu/rate.png");
         spriteButtonTutorial = createSprite("menu/tutorial.png");
