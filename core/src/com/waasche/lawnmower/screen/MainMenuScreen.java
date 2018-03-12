@@ -19,6 +19,8 @@ import com.waasche.lawnmower.resources.Sounds;
 import com.waasche.lawnmower.view.LevelTypeActor;
 import com.waasche.lawnmower.view.MenuButtonActor;
 
+import java.util.Iterator;
+
 
 public class MainMenuScreen extends MenuScreen implements Screen {
 
@@ -29,13 +31,13 @@ public class MainMenuScreen extends MenuScreen implements Screen {
     public MainMenuScreen(MainClass mainClass) {
         super(mainClass, 0);
         this.list = new Table();
-        this.stage.addActor(this.container);
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         for (LevelTypeMetaData levelTypeMetaData : levelTypeMetaDataList) {
             pixmap.setColor(levelTypeMetaData.getColor());
             pixmap.fill();
             this.skin.add("buttonLevelPack_" + levelTypeMetaData.getId(), new Texture(pixmap));
         }
+        this.skin.add("blackLine", new Texture(pixmap));
         pixmap.dispose();
         pixmap = new Pixmap((int) Assets.SCREEN_UNIT, 1, Pixmap.Format.RGBA8888);
         pixmap.setColor(Assets.colorText);
@@ -46,13 +48,14 @@ public class MainMenuScreen extends MenuScreen implements Screen {
         this.scrollStyle.vScrollKnob = this.skin.getDrawable("scrollKnob");
         this.scroll = new ScrollPane(this.list, this.scrollStyle);
         this.scroll.setFadeScrollBars(false);
-        createLayout();
         this.show();
     }
 
-    public void show(){
-        this.scroll.layout();
+    public void show() {
+        createLayout();
         this.container.setFillParent(true);
+        this.stage.addActor(this.container);
+        this.scroll.layout();
         this.scroll.setScrollY(SessionData.getLevelPackSelectScrollPosition());
         this.scroll.updateVisualScroll();
 
@@ -65,34 +68,30 @@ public class MainMenuScreen extends MenuScreen implements Screen {
 
     protected void orientationChange() {
         super.orientationChange();
-        createLayout();
     }
 
 
     public void createLayout() {
         this.list.clearChildren();
         this.container.clearChildren();
-        for (int i=0; i!=levelTypeMetaDataList.size(); i++) {
+        for (int i = 0; i != levelTypeMetaDataList.size(); i++) {
             float f;
             Actor levelPackActor = new LevelTypeActor(levelTypeMetaDataList.get(i), this.skin, Assets.SCREEN_UNIT * 13.5f);
             levelPackActor.addListener(new LevelPackClickListener(levelPackActor));
             Cell width = this.list.add(levelPackActor).width(calcListWidth());
-            float f2 = Assets.SCREEN_UNIT * 2.0f;
-            if (i < this.levelTypeMetaDataList.size() - 1) {
-                f = Assets.SCREEN_UNIT * 1.5f;
+            if(i == levelTypeMetaDataList.size()-1){
+                width.pad(0.0f, Assets.SCREEN_UNIT * 2.0f, Assets.SCREEN_UNIT * 5.5f, Assets.SCREEN_UNIT * 2.0f);
             } else {
-                f = 0.0f;
+                width.pad(0.0f, Assets.SCREEN_UNIT * 2.0f, Assets.SCREEN_UNIT * 1.5f, Assets.SCREEN_UNIT * 2.0f);
             }
-            width.pad(0.0f, f2, f, Assets.SCREEN_UNIT * 2.0f);
             this.list.row();
         }
+        this.list.row();
         this.list.setWidth(calcListWidth());
         this.scroll.setScrollingDisabled(true, false);
         this.container.add(new Label(Assets.strings.get("levelPackHint"), this.skin, "lightMedium")).height(Assets.SCREEN_UNIT * 10.0f).padBottom(Assets.SCREEN_UNIT * 2.0f).expandX();
         this.container.row();
         this.container.add(this.scroll).padBottom(isLandscape() ? -9.0f * Assets.SCREEN_UNIT : 0.0f).expand();
-        this.container.row();
-        //this.container.add(this.buttonBack).size(Assets.SCREEN_UNIT * 10.0f, Assets.SCREEN_UNIT * 10.0f).pad(Assets.SCREEN_UNIT * 4.0f, Assets.SCREEN_UNIT * 4.0f, Assets.SCREEN_UNIT * 4.0f, 0.0f).align(8);
     }
 
     private float calcListWidth() {
@@ -101,9 +100,20 @@ public class MainMenuScreen extends MenuScreen implements Screen {
 
 
     public void navigateBack() {
-        Gdx.app.exit();
+        mainClass.setCurrentScreen(new StartScreen(mainClass));
+        mainClass.showCurrentScreen();
     }
 
+
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        Iterator it = this.list.getCells().iterator();
+        while (it.hasNext()) {
+            ((Cell) it.next()).width(calcListWidth());
+        }
+        this.list.setWidth(calcListWidth());
+        this.list.layout();
+    }
 
     private class LevelPackClickListener extends ClickListener {
         private LevelTypeActor actor;

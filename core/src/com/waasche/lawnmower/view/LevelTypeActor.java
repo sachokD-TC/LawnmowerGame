@@ -24,7 +24,9 @@ public class LevelTypeActor extends Table {
         add(new Label(Assets.strings.get(metaData.getTitle()), skin, "darkLarge")).expandX().left().pad(size / 20.0f, size / 10.0f, 0.0f, 0.0f);
         add(createIconStar()).size(size / 1.8f, size / 1.8f).pad(size / 10.0f, 0.0f, 0.0f, size / 10.0f);
         row();
-        add(new Label(Assets.strings.get(metaData.getSubtitle()), skin, "darkSmall")).expandX().left().pad(0.0f, size / 10.0f, size / 8.0f, 0.0f);
+        if(metaData.getSubtitle() != null) {
+            add(new Label(Assets.strings.get(metaData.getSubtitle()), skin, "darkSmall")).expandX().left().pad(0.0f, size / 10.0f, size / 8.0f, 0.0f);
+        }
         add(new Label(metaData.getCompletedLevels() + "/" + metaData.getTotalLevels(), skin, "darkSmall")).pad(0.0f, 0.0f, size / 10.0f, size / 10.0f);
         setHeight(size);
         setTouchable(Touchable.enabled);

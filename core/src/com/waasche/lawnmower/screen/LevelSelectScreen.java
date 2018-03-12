@@ -72,7 +72,9 @@ public class LevelSelectScreen extends MenuScreen implements Screen {
         fillLevelGrid();
         this.container.add(new Label(Assets.strings.get(this.levelPackMetaData.getTitle()), this.skin, "lightLarge")).height(8.0f * Assets.SCREEN_UNIT).padTop(2.0f * Assets.SCREEN_UNIT).expandX();
         this.container.row();
-        this.container.add(new Label(Assets.strings.get(this.levelPackMetaData.getSubtitle()), this.skin, "lightSmall")).height(3.0f * Assets.SCREEN_UNIT).expandX();
+        if (this.levelPackMetaData.getSubtitle() != null){
+            this.container.add(new Label(Assets.strings.get(this.levelPackMetaData.getSubtitle()), this.skin, "lightSmall")).height(3.0f * Assets.SCREEN_UNIT).expandX();
+        }
         this.container.row();
         Cell add = this.container.add(this.levelGrid);
         if (isLandscape()) {

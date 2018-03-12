@@ -3,7 +3,6 @@ package com.waasche.lawnmower.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,9 +11,13 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
-import com.waasche.lawnmower.controller.LawnmowerCameraController;
 import com.waasche.lawnmower.data.*;
 import com.waasche.lawnmower.main.MainClass;
 import com.waasche.lawnmower.resources.Assets;
@@ -25,8 +28,6 @@ import java.util.ArrayList;
 
 
 public class GameScreen implements Screen {
-    private static final int TARGET_WIDTH = 560;
-    private static final float UNIT_TO_PIXEL = TARGET_WIDTH * 0.15f;
     public static final int COMPLEXITY_INDEX = 0;
     private int levelInd;
     private int boardSize;
@@ -48,6 +49,14 @@ public class GameScreen implements Screen {
     private Label levelLabel;
     private Label movesCount;
     private Label scoresLabel;
+    private Actor startFromBeginningActor;
+    private Actor leftButtonActor;
+    private Actor rightButtonActor;
+    private Actor downButtonActor;
+    private Actor upButtonActor;
+    private Stage stage;
+    private boolean isStartFromBeginning = false;
+    private Moves move = Moves.NONE;
 
 
     public GameScreen(MainClass mainClass, LevelTypeMetaData levelPackMetaData, int levelInd) {
@@ -59,10 +68,64 @@ public class GameScreen implements Screen {
         this.currentLevel.setPassedLines(new ArrayList<FieldLine>());
         this.currentLevel.setPassedPoints(new ArrayList<FieldPoint>());
         Gdx.graphics.setContinuousRendering(true);
-        levelLabel = new Label(Assets.strings.get("level") + " " + levelTypeMetaData.getId() + "/" + levelInd, Assets.textStyle);
-        movesCount = new Label(Assets.strings.get("moves") + " 0", Assets.textStyle);
-        scoresLabel = new Label(Assets.strings.get("scores") + " 0", Assets.textStyle);
+        prepareStage(levelInd);
+        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
         show();
+    }
+
+    private void prepareStage(int levelInd) {
+        Assets.labelStyle.font = Assets.fontLarge;
+        levelLabel = new Label(Assets.strings.get("level") + " " + levelTypeMetaData.getId() + "/" + levelInd, Assets.labelStyle);
+        movesCount = new Label(Assets.strings.get("moves") + " 0", Assets.labelStyle);
+        scoresLabel = new Label(Assets.strings.get("scores") + " 0", Assets.labelStyle);
+        stage = new Stage();
+        startFromBeginningActor = new Image(Assets.spriteButtonBack);
+        startFromBeginningActor.setPosition(Assets.ANDROID_WIDTH - Assets.SCREEN_UNIT * 20f, Assets.ANDROID_HEIGHT * 0.7f);
+        startFromBeginningActor.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                isStartFromBeginning = true;
+                restartCurrentLevel();
+            }
+        });
+        leftButtonActor = new Image(Assets.spriteButtonArrowLeft);
+        leftButtonActor.setPosition(Assets.ANDROID_WIDTH - Assets.SCREEN_UNIT * 23f, Assets.ANDROID_HEIGHT * 0.2f);
+        leftButtonActor.setRotation(-45);
+        leftButtonActor.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                move = Moves.LEFT;
+            }
+        });
+        rightButtonActor = new Image(Assets.spriteButtonArrowRight);
+        rightButtonActor.setPosition(Assets.ANDROID_WIDTH - Assets.SCREEN_UNIT * 15f, Assets.ANDROID_HEIGHT * 0.2f);
+        rightButtonActor.setRotation(-45);
+        rightButtonActor.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                move = Moves.RIGHT;
+            }
+        });
+        upButtonActor = new Image(Assets.spriteButtonArrowUp);
+        upButtonActor.setRotation(45);
+        upButtonActor.setPosition(Assets.ANDROID_WIDTH - Assets.ANDROID_WIDTH*0.9f, Assets.ANDROID_HEIGHT * 0.36f);
+        upButtonActor.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                move = Moves.UP;
+            }
+        });
+        downButtonActor = new Image(Assets.spriteButtonArrowDown);
+        downButtonActor.setRotation(-135);
+        downButtonActor.setPosition(Assets.ANDROID_WIDTH - Assets.ANDROID_WIDTH*0.9f, Assets.ANDROID_HEIGHT * 0.4f);
+        downButtonActor.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                move = Moves.DOWN;
+            }
+        });
+
+        stage.addActor(startFromBeginningActor);
+        stage.addActor(leftButtonActor);
+        stage.addActor(rightButtonActor);
+        stage.addActor(upButtonActor);
+        stage.addActor(downButtonActor);
     }
 
     @Override
@@ -75,7 +138,7 @@ public class GameScreen implements Screen {
         cam.near = 1;
         cam.far = 50;
         matrix.setToRotation(new Vector3(1, 0, 0), 90);
-        sprites = new Sprite[currentLevel.getSizeX()][currentLevel.getSizeY()];
+        sprites = new Sprite[currentLevel.getSizeY()][currentLevel.getSizeX()];
         for (int z = 0; z < currentLevel.getSizeX(); z++) {
             for (int x = 0; x < currentLevel.getSizeY(); x++) {
                 if (LevelService.isWall(currentLevel, new FieldPoint(x, z))) {
@@ -94,12 +157,15 @@ public class GameScreen implements Screen {
         lawnmower.setSize(1, 1);
         fieldSpritesBatch = new SpriteBatch();
         bgBatch = new SpriteBatch();
-        Gdx.input.setInputProcessor(new LawnmowerCameraController(cam));
     }
 
     @Override
     public void render(float delta) {
-        Moves move = getMoveByTouchedTile();
+        drawBgBatch();
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            backToMenu();
+            return;
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP) && !isMoving || move.equals(Moves.UP)) {
             incPosition = Moves.UP.getFieldPoint();
             lawnmower.upTexture();
@@ -123,13 +189,13 @@ public class GameScreen implements Screen {
                 currentLevel.addPassedPoints(movePosition);
                 lawnmower.setLawnmowerPosition(movePosition);
                 movesCount.setText(Assets.strings.get("moves") + " " + currentLevel.getPassedPoints().size());
-                scoresLabel.setText(Assets.strings.get("scores") + " " + currentLevel.getPassedPoints().size()*124);
+                scoresLabel.setText(Assets.strings.get("scores") + " " + currentLevel.getPassedPoints().size() * 124);
                 if (LevelService.isFail(currentLevel, currentLine)) {
                     Sounds.playCrashSound(0.1f);
                     Timer.schedule(new Timer.Task() {
                         @Override
                         public void run() {
-                          backToMenu();
+                            backToMenu();
                         }
                     }, Assets.DELAY_TIME_IN_SECONDS);
                 }
@@ -143,7 +209,7 @@ public class GameScreen implements Screen {
                 isStopped = false;
             } else {
                 isMoving = false;
-                if(!isStopped) {
+                if (!isStopped) {
                     Sounds.playTickSound(0.1f);
                     isStopped = true;
                 }
@@ -152,16 +218,7 @@ public class GameScreen implements Screen {
                 }
             }
         }
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         cam.update();
-        bgBatch.begin();
-        Assets.spriteBackground.draw(bgBatch);
-        levelLabel.draw(bgBatch, 1f);
-        movesCount.setPosition(Assets.ANDROID_HEIGHT - Assets.SCREEN_UNIT, 0.0f);
-        scoresLabel.setPosition(0f, Assets.SCREEN_UNIT*2f);
-        movesCount.draw(bgBatch, 1f);
-        scoresLabel.draw(bgBatch,1f);
-        bgBatch.end();
         fieldSpritesBatch.setProjectionMatrix(cam.combined);
         fieldSpritesBatch.setTransformMatrix(matrix);
         fieldSpritesBatch.begin();
@@ -174,6 +231,16 @@ public class GameScreen implements Screen {
         sprites[lawnmower.getLawnmowerPosition().getX()][lawnmower.getLawnmowerPosition().getY()].setSize(1, 1);
         lawnmower.draw(fieldSpritesBatch);
         fieldSpritesBatch.end();
+
+    }
+
+    private void drawBgBatch() {
+        bgBatch.begin();
+        Assets.spriteBackground.draw(bgBatch);
+        levelLabel.draw(bgBatch, 1f);
+        bgBatch.end();
+        stage.draw();
+        stage.act();
     }
 
     private void moveToNextLevel() {
@@ -187,10 +254,17 @@ public class GameScreen implements Screen {
         }
     }
 
-    private void backToMenu() {
-        mainClass.setCurrentScreen(new LevelSelectScreen(mainClass, levelTypeMetaData));
-        mainClass.showCurrentScreen();
+    private void restartCurrentLevel() {
+        mainClass.setCurrentScreen(new GameScreen(mainClass, levelTypeMetaData, levelInd));
         this.dispose();
+    }
+
+    private void backToMenu() {
+        if (!isStartFromBeginning) {
+            mainClass.setCurrentScreen(new LevelSelectScreen(mainClass, levelTypeMetaData));
+            mainClass.showCurrentScreen();
+            this.dispose();
+        }
     }
 
     private Moves getMoveByTouchedTile() {

@@ -28,15 +28,14 @@ public class Assets {
     public static Lawnmower lawnmowerUpRight;
     public static Color colorBackground;
     public static Color colorButtonLevelIncomplete;
-    public static final Texture lawnmowerUpRightTexture = new Texture("actor/up-right.png");
-    public static final Texture lawnmowerUpLeftTexture =  new Texture("actor/up-left.png");
+    public static final Texture lawnmowerUpRightTexture = new Texture("actor/up-left.png");
+    public static final Texture lawnmowerUpLeftTexture =  new Texture("actor/up-right.png");
     public static final Texture lawnmowerDownRightTexture = new Texture("actor/down-right.png");
     public static final Texture lawnmowerDownLeftTexture = new Texture("actor/down-left.png");
     public static Sprite grassFull;
     public static Sprite grassEmpty;
     public static Sprite wallSprite;
     public static Map<Integer, LevelsList> levelsList = new HashMap<Integer, LevelsList>();
-    public static Color wallColor;
     public static Label.LabelStyle textStyle;
     public static Color colorText;
     public static BitmapFont fontLarge;
@@ -65,7 +64,10 @@ public class Assets {
     public static Sprite spriteButtonRate;
     public static Sprite spriteButtonArrowLeft;
     public static Sprite spriteButtonArrowRight;
+    public static Sprite spriteButtonArrowUp;
+    public static Sprite spriteButtonArrowDown;
     public static Sprite[] spritesTutorial;
+    public static Label.LabelStyle labelStyle;
 
 
     public static void load() {
@@ -82,6 +84,10 @@ public class Assets {
         spriteButtonTutorial = createSprite("menu/tutorial.png");
         spriteButtonArrowLeft = createSprite("menu/buttonArrowLeft.png");
         spriteButtonArrowRight = createSprite("menu/buttonArrowRight.png");
+        spriteButtonArrowDown = createSprite("menu/buttonArrowRight.png");
+        spriteButtonArrowDown.rotate(-45);
+        spriteButtonArrowUp = createSprite("menu/buttonArrowRight.png");
+        spriteButtonArrowUp.rotate(45);
         spritesTutorial = new Sprite[3];
         spritesTutorial[0] = createSprite("menu/tutorial0.png");
         spritesTutorial[1] = createSprite("menu/tutorial1.png");
@@ -91,11 +97,13 @@ public class Assets {
         levelsList.put(6, new Level("levels/levels6.json").getLevelsList());
         levelsList.put(7, new Level("levels/levels7.json").getLevelsList());
         levelsList.put(8, new Level("levels/levels8.json").getLevelsList());
-        wallColor = new Color(1, 0, 0, 1);
+        levelsList.put(9, new Level("levels/levels9.json").getLevelsList());
+        levelsList.put(10, new Level("levels/levels10.json").getLevelsList());
         textStyle = new Label.LabelStyle();
         textStyle.font = new BitmapFont();
         fontMedium = new BitmapFont();
         fontScale = 0.0f;
+        labelStyle = new Label.LabelStyle();
         strings = I18NBundle.createBundle(com.waasche.lawnmower.resources.AssetLoader.getInternalFileHandler("strings/strings"));
         colorText = createColor(255, 255, 255);
         spriteButtonOk = createSprite("menu/ok.png");
@@ -127,7 +135,7 @@ public class Assets {
         if (scale != fontScale) {
             FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(AssetLoader.getInternalFileHandler("roboto.ttf"));
             FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-            fontParameter.characters += "ÁÉÍÓÖ?ÚÜ?áéíóö?úü?";
+            fontParameter.characters += "ï¿½ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½?";
             fontParameter.size = Math.round(28.0f * scale);
             fontLarge = fontGenerator.generateFont(fontParameter);
             fontParameter.size = Math.round(20.0f * scale);

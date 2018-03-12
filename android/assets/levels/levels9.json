@@ -5,37 +5,49 @@
       name: "1",
       size:{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
+        x:9,
+        y:9
       },
       walls:
       [
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x: 3,
-          y: 3},
+          x: 0,
+          y: 2},
         {class:com.waasche.lawnmower.data.FieldPoint,
-          x:4,
-          y:0},{
+          x:6,
+          y:4},{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:0,
-        y:5},
+        x:1,
+        y:3},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:5,
           y:7},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:3,
-          y:4},
+          x:4,
+          y:7},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:3,
+          y:7},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:3,
+          y:6},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:0,
           y:5},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:7,
-          y:0}
+          y:1},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:8,
+          y:8}
       ],
       levelTypes:
       [
@@ -44,12 +56,12 @@
           id: 0,
           start:{
             class:com.waasche.lawnmower.data.FieldPoint
-            x:2,
-            y:5
+            x:0,
+            y:3
           },
-          complexity: 132,
-          minLength: 64,
-          maxLength: 64
+          complexity: 461,
+          minLength: 83,
+          maxLength: 83
         }
       ]
     },
@@ -58,37 +70,41 @@
       name: "2",
       size:{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
+        x:9,
+        y:9
       },
       walls:
       [
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x: 3,
+          x: 7,
           y: 7},
         {class:com.waasche.lawnmower.data.FieldPoint,
-          x:6,
+          x:2,
           y:3},{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:7,
+        x:3,
         y:0},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:1,
-          y:6},
+          x:6,
+          y:4},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:5,
-          y:4},
+          x:8,
+          y:2},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:1,
+          y:1},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:0,
-          y:4},
+          y:5},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:5}
+          x:5,
+          y:4}
       ],
       levelTypes:
       [
@@ -98,11 +114,11 @@
           start:{
             class:com.waasche.lawnmower.data.FieldPoint
             x:1,
-            y:4
+            y:7
           },
-          complexity: 132,
-          minLength: 60,
-          maxLength: 60
+          complexity: 384,
+          minLength: 79,
+          maxLength: 79
         }
       ]
     },
@@ -111,301 +127,32 @@
       name: "3",
       size:{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
-      },
-      walls:
-      [
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x: 4,
-          y: 6},
-        {class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:3},{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:7,
-        y:0},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:1,
-          y:1},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:7},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:5,
-          y:2},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:5}
-      ],
-      levelTypes:
-      [
-        {
-          class:com.waasche.lawnmower.data.LevelTypes,
-          id: 0,
-          start:{
-            class:com.waasche.lawnmower.data.FieldPoint
-            x:0,
-            y:4
-          },
-          complexity: 189,
-          minLength: 71,
-          maxLength: 71
-        }
-      ]
-   },
-    {
-      class:com.waasche.lawnmower.data.Level,
-      name: "4",
-      size:{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
+        x:9,
+        y:9
       },
       walls:
       [
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x: 7,
-          y: 2},
+          y: 5},
         {class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:3},{
+          x:4,
+          y:4},{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:5,
-        y:4},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:6,
-          y:6},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:5,
-          y:6},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:3,
-          y:7}
-      ],
-      levelTypes:
-      [
-        {
-          class:com.waasche.lawnmower.data.LevelTypes,
-          id: 0,
-          start:{
-            class:com.waasche.lawnmower.data.FieldPoint
-            x:3,
-            y:6
-          },
-          complexity: 189,
-          minLength: 68,
-          maxLength: 68
-        }
-      ]
-    },
-    {
-      class:com.waasche.lawnmower.data.Level,
-      name: "5",
-      size:{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
-      },
-      walls:
-      [
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x: 2,
-          y: 6},
-        {class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:5},{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:7,
-        y:3},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:6,
-          y:1},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:5,
-          y:7},
+        x:1,
+        y:1},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:0,
-          y:0},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:1,
-          y:2},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:3,
-          y:6}
-      ],
-      levelTypes:
-      [
-        {
-          class:com.waasche.lawnmower.data.LevelTypes,
-          id: 0,
-          start:{
-            class:com.waasche.lawnmower.data.FieldPoint
-            x:1,
-            y:0
-          },
-          complexity: 120,
-          minLength: 65,
-          maxLength: 65
-        }
-      ]
-    },
-    {
-      class:com.waasche.lawnmower.data.Level,
-      name: "6",
-      size:{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
-      },
-      walls:
-      [
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x: 3,
-          y: 0},
-        {class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:5},{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:2,
-        y:6},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:7},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:2},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
           y:4},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:4,
-          y:3},
+          x:8,
+          y:8},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:3}
-      ],
-      levelTypes:
-      [
-        {
-          class:com.waasche.lawnmower.data.LevelTypes,
-          id: 0,
-          start:{
-            class:com.waasche.lawnmower.data.FieldPoint
-            x:7,
-            y:6
-          },
-          complexity: 205,
-          minLength: 65,
-          maxLength: 65
-        }
-      ]
-    },
-    {
-      class:com.waasche.lawnmower.data.Level,
-      name: "7",
-      size:{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
-      },
-      walls:
-      [
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x: 6,
-          y: 6},
-        {class:com.waasche.lawnmower.data.FieldPoint,
-          x:1,
-          y:5},{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:0,
-        y:0},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:6,
-          y:1},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:4},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:5,
-          y:0},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:3},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:4,
-          y:7}
-      ],
-      levelTypes:
-      [
-        {
-          class:com.waasche.lawnmower.data.LevelTypes,
-          id: 0,
-          start:{
-            class:com.waasche.lawnmower.data.FieldPoint
-            x:0,
-            y:7
-          },
-          complexity: 60,
-          minLength: 68,
-          maxLength: 68
-        }
-      ]
-    },
-    {
-      class:com.waasche.lawnmower.data.Level,
-      name: "8",
-      size:{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
-      },
-      walls:
-      [
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x: 5,
-          y: 0},
-        {class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:3},{
-        class:com.waasche.lawnmower.data.FieldPoint,
-        x:0,
-        y:0},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:5},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:6,
+          x:8,
           y:2}
       ],
       levelTypes:
@@ -415,42 +162,38 @@
           id: 0,
           start:{
             class:com.waasche.lawnmower.data.FieldPoint
-            x:1,
-            y:5
+            x:3,
+            y:4
           },
-          complexity: 85,
-          minLength: 72,
-          maxLength: 72
+          complexity: 372,
+          minLength: 85,
+          maxLength: 85
         }
       ]
     },
     {
       class:com.waasche.lawnmower.data.Level,
-      name: "9",
+      name: "4",
       size:{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
+        x:9,
+        y:9
       },
       walls:
       [
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x: 3,
-          y: 7},
+          x: 8,
+          y: 8},
         {class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:0},{
+          x:3,
+          y:8},{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:5,
-        y:6},
+        x:7,
+        y:1},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:7},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:2,
+          x:4,
           y:0}
       ],
       levelTypes:
@@ -460,12 +203,293 @@
           id: 0,
           start:{
             class:com.waasche.lawnmower.data.FieldPoint
-            x:5,
+            x:1,
+            y:7
+          },
+          complexity: 113,
+          minLength: 82,
+          maxLength: 82
+        }
+      ]
+    },
+    {
+      class:com.waasche.lawnmower.data.Level,
+      name: "5",
+      size:{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:9,
+        y:9
+      },
+      walls:
+      [
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x: 1,
+          y: 0},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x: 3,
+          y: 7},
+        {class:com.waasche.lawnmower.data.FieldPoint,
+          x:7,
+          y:4},{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:8,
+        y:0},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:4,
+          y:4},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:0,
+          y:3},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:6,
+          y:2},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:0,
+          y:0},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:5,
+          y:8},
+      ],
+      levelTypes:
+      [
+        {
+          class:com.waasche.lawnmower.data.LevelTypes,
+          id: 0,
+          start:{
+            class:com.waasche.lawnmower.data.FieldPoint
+            x:7,
+            y:3
+          },
+          complexity: 483,
+          minLength: 85,
+          maxLength: 85
+        }
+      ]
+    },
+    {
+      class:com.waasche.lawnmower.data.Level,
+      name: "6",
+      size:{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:9,
+        y:9
+      },
+      walls:
+      [
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x: 0,
+          y: 3},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x: 6,
+          y: 8},
+        {class:com.waasche.lawnmower.data.FieldPoint,
+          x:0,
+          y:0},{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:5,
+        y:4},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:3,
+          y:7},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:7,
+          y:5},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:8,
+          y:6},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:8,
+          y:2},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:0,
+          y:6},
+      ],
+      levelTypes:
+      [
+        {
+          class:com.waasche.lawnmower.data.LevelTypes,
+          id: 0,
+          start:{
+            class:com.waasche.lawnmower.data.FieldPoint
+            x:8,
             y:5
           },
-          complexity: 50,
-          minLength: 65,
-          maxLength: 65
+          complexity: 115,
+          minLength: 81,
+          maxLength: 81
+        }
+      ]
+    },
+    {
+      class:com.waasche.lawnmower.data.Level,
+      name: "7",
+      size:{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:9,
+        y:9
+      },
+      walls:
+      [
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x: 5,
+          y: 0},
+        {class:com.waasche.lawnmower.data.FieldPoint,
+          x:6,
+          y:6},{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:2,
+        y:0},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:8,
+          y:5},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:1,
+          y:7},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:3,
+          y:8},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:8,
+          y:0}
+      ],
+      levelTypes:
+      [
+        {
+          class:com.waasche.lawnmower.data.LevelTypes,
+          id: 0,
+          start:{
+            class:com.waasche.lawnmower.data.FieldPoint
+            x:8,
+            y:8
+          },
+          complexity: 58,
+          minLength: 93,
+          maxLength: 93
+        }
+      ]
+    },
+    {
+      class:com.waasche.lawnmower.data.Level,
+      name: "8",
+      size:{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:9,
+        y:9
+      },
+      walls:
+      [
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x: 5,
+          y: 3},
+        {class:com.waasche.lawnmower.data.FieldPoint,
+          x:0,
+          y:3},{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:1,
+        y:4},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:0,
+          y:0},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:7,
+          y:1},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:6,
+          y:8},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:4,
+          y:6}
+      ],
+      levelTypes:
+      [
+        {
+          class:com.waasche.lawnmower.data.LevelTypes,
+          id: 0,
+          start:{
+            class:com.waasche.lawnmower.data.FieldPoint
+            x:0,
+            y:6
+          },
+          complexity: 183,
+          minLength: 87,
+          maxLength: 87
+        }
+      ]
+    },
+    {
+      class:com.waasche.lawnmower.data.Level,
+      name: "9",
+      size:{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:9,
+        y:9
+      },
+      walls:
+      [
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x: 4,
+          y: 2},
+        {class:com.waasche.lawnmower.data.FieldPoint,
+          x:6,
+          y:0},{
+        class:com.waasche.lawnmower.data.FieldPoint,
+        x:5,
+        y:5},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:5,
+          y:2},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:7,
+          y:7},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:0,
+          y:6},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:1,
+          y:1}
+      ],
+      levelTypes:
+      [
+        {
+          class:com.waasche.lawnmower.data.LevelTypes,
+          id: 0,
+          start:{
+            class:com.waasche.lawnmower.data.FieldPoint
+            x:5,
+            y:3
+          },
+          complexity: 183,
+          minLength: 91,
+          maxLength: 91
         }
       ]
     },
@@ -474,41 +498,37 @@
       name: "10",
       size:{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
+        x:9,
+        y:9
       },
       walls:
       [
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x: 1,
-          y: 0},
+          x: 3,
+          y: 8},
         {class:com.waasche.lawnmower.data.FieldPoint,
-          x:4,
-          y:6},{
+          x:6,
+          y:7},{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:0,
-        y:7},
+        x:6,
+        y:0},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:3,
-          y:1},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:0},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:1,
+          x:4,
           y:2},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:0,
-          y:0},
+          y:8},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:6,
-          y:3},
+          y:8},
+        {
+          class:com.waasche.lawnmower.data.FieldPoint,
+          x:1,
+          y:1}
       ],
       levelTypes:
       [
@@ -520,9 +540,9 @@
             x:6,
             y:6
           },
-          complexity: 972,
-          minLength: 68,
-          maxLength: 68
+          complexity: 25,
+          minLength: 81,
+          maxLength: 81
         }
       ]
     },
@@ -531,41 +551,37 @@
       name: "11",
       size:{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:8,
-        y:8
+        x:9,
+        y:9
       },
       walls:
       [
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x: 1,
-          y: 4},
+          x: 7,
+          y: 3},
         {class:com.waasche.lawnmower.data.FieldPoint,
-          x:6,
-          y:1},{
+          x:8,
+          y:3},{
         class:com.waasche.lawnmower.data.FieldPoint,
-        x:1,
+        x:0,
         y:2},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:5,
-          y:7},
+          y:8},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:2},
+          x:1,
+          y:5},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
-          x:7,
-          y:1},
+          x:8,
+          y:6},
         {
           class:com.waasche.lawnmower.data.FieldPoint,
           x:4,
-          y:3},
-        {
-          class:com.waasche.lawnmower.data.FieldPoint,
-          x:0,
-          y:7},
+          y:8}
       ],
       levelTypes:
       [
@@ -575,11 +591,11 @@
           start:{
             class:com.waasche.lawnmower.data.FieldPoint
             x:7,
-            y:0
+            y:6
           },
-          complexity: 74,
-          minLength: 69,
-          maxLength: 69
+          complexity: 225,
+          minLength: 90,
+          maxLength: 90
         }
       ]
     }

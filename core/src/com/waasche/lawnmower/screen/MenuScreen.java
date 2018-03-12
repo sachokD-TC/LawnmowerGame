@@ -31,13 +31,12 @@ public abstract class MenuScreen implements Screen {
     public int levelInd;
 
 
-
-
     public MenuScreen(MainClass mainClass, int levelInd) {
         Assets.updateFont(Assets.SCREEN_UNIT / 5.0f);
         this.mainClass = mainClass;
         this.levelInd = levelInd;
         this.container = new Table();
+        this.container.setFillParent(true);
         this.stage = new Stage(new ScreenViewport());
         this.container.clearChildren();
         this.skin = new Skin();
@@ -72,21 +71,19 @@ public abstract class MenuScreen implements Screen {
 
 
     @Override
-    public void show()
-    {
+    public void show() {
         this.stage.draw();
     }
 
     @Override
     public void render(float delta) {
         MenuDrawingService.clearScreen();
-        this.container.setFillParent(true);
         this.stage.addActor(this.container);
         stage.act();
         stage.draw();
     }
 
-    public void buttonClick(MenuButtonActor button){
+    public void buttonClick(MenuButtonActor button) {
     }
 
 
