@@ -14,7 +14,6 @@ import com.waasche.lawnmower.view.MenuButtonActor;
 public class TutorialScreen extends MenuScreen implements Screen {
 
     private MenuButtonActor buttonBack;
-    private MenuButtonActor buttonDone;
     private MenuButtonActor buttonNext;
     private MenuButtonActor buttonPrev;
     private Table content;
@@ -22,6 +21,7 @@ public class TutorialScreen extends MenuScreen implements Screen {
     private int tutorialIndex;
     private int tutorialLength;
     private Label tutorialText;
+    private Image backgroundImage = Assets.grassBackgroundImage;
 
     public TutorialScreen(MainClass mainClass) {
         super(mainClass, 0);
@@ -34,8 +34,8 @@ public class TutorialScreen extends MenuScreen implements Screen {
         this.tutorialText = new Label("", this.skin, "lightSmall");
         this.tutorialText.setWrap(true);
         this.tutorialText.setAlignment(1);
+        this.container.background(this.backgroundImage.getDrawable());
         this.buttonBack = new MenuButtonActor(this, this.skin.getDrawable("buttonBack"), Assets.SCREEN_UNIT  * 10.0f);
-        this.buttonDone = new MenuButtonActor(this, this.skin.getDrawable("buttonOk"), Assets.SCREEN_UNIT  * 10.0f);
         this.buttonPrev = new MenuButtonActor(this, this.skin.getDrawable("buttonArrowLeft"), Assets.SCREEN_UNIT  * 7.5f);
         this.buttonNext = new MenuButtonActor(this, this.skin.getDrawable("buttonArrowRight"), Assets.SCREEN_UNIT  * 7.5f);
         this.content = new Table();
@@ -61,7 +61,6 @@ public class TutorialScreen extends MenuScreen implements Screen {
         this.container.row();
         this.container.add(this.buttonBack).size(Assets.SCREEN_UNIT  * 10.0f, Assets.SCREEN_UNIT  * 10.0f).pad(0.0f, Assets.SCREEN_UNIT  * 4.0f, Assets.SCREEN_UNIT  * 4.0f, 0.0f);
         this.container.add().expandX();
-        this.container.add(this.buttonDone).size(Assets.SCREEN_UNIT  * 10.0f, Assets.SCREEN_UNIT  * 10.0f).pad(0.0f, 0.0f, Assets.SCREEN_UNIT  * 4.0f, Assets.SCREEN_UNIT  * 4.0f);
     }
 
     private void prevPage() {
@@ -97,18 +96,13 @@ public class TutorialScreen extends MenuScreen implements Screen {
             f = 0.0f;
         }
         menuButtonActor.setColor(1.0f, 1.0f, 1.0f, f);
-        MenuButtonActor menuButtonActor2 = this.buttonDone;
-        if (this.tutorialIndex == this.tutorialLength - 1) {
-            f2 = 1.0f;
-        }
-        menuButtonActor2.setColor(1.0f, 1.0f, 1.0f, f2);
     }
 
 
     public void buttonClick(MenuButtonActor button) {
         super.buttonClick(button);
-        if (this.buttonBack.equals(button) || this.buttonDone.equals(button)) {
-            Sounds.playMenuClick(0.0f);
+        if (this.buttonBack.equals(button)) {
+            Sounds.playButtonClick(0.0f);
             navigateBack();
         } else if (this.buttonPrev.equals(button)) {
             Sounds.playButtonClick(0.0f);
@@ -120,6 +114,6 @@ public class TutorialScreen extends MenuScreen implements Screen {
     }
 
     public void navigateBack() {
-        mainClass.setCurrentScreen(new HelpScreen(mainClass));
+        mainClass.setCurrentScreen(new StartScreen(mainClass));
     }
 }

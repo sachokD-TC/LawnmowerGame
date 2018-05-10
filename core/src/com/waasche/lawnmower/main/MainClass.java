@@ -17,8 +17,6 @@ public class MainClass extends ApplicationAdapter {
         Assets.load();
         GameProgress.load();
         UserSettings.load();
-        GameProgress.setLevelTypeCompleted("4", true);
-        GameProgress.setCompleted("4", "1", true);
         currentScreen = new StartScreen(this);
         showCurrentScreen();
     }

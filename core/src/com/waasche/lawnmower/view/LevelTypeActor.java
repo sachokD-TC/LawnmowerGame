@@ -2,11 +2,7 @@ package com.waasche.lawnmower.view;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.waasche.lawnmower.data.LevelTypeMetaData;
 import com.waasche.lawnmower.resources.Assets;
 
@@ -28,8 +24,17 @@ public class LevelTypeActor extends Table {
             add(new Label(Assets.strings.get(metaData.getSubtitle()), skin, "darkSmall")).expandX().left().pad(0.0f, size / 10.0f, size / 8.0f, 0.0f);
         }
         add(new Label(metaData.getCompletedLevels() + "/" + metaData.getTotalLevels(), skin, "darkSmall")).pad(0.0f, 0.0f, size / 10.0f, size / 10.0f);
-        setHeight(size);
-        setTouchable(Touchable.enabled);
+        row();
+        Table progressTable = new Table();
+        Button button = new Button(Assets.gradientRectangle);
+        button.setTransform(true);
+        float fullSizeOfProgressBar = 60*Assets.SCREEN_UNIT;
+        float progressSize = fullSizeOfProgressBar*getMetaData().getCompletedLevels()/getMetaData().getTotalLevels();
+        progressTable.add(button).width(progressSize).padLeft(8.842f*Assets.SCREEN_UNIT - fullSizeOfProgressBar+progressSize);
+        add(progressTable).width(this.getWidth()).fillX();
+
+
+        pack();
     }
 
     private Actor createIconStar() {
@@ -40,7 +45,7 @@ public class LevelTypeActor extends Table {
         }
         Group iconStar = new Group();
         iconStar.addActor(iconStarBase);
-        Image iconStarFill = new Image(this.skin.getDrawable("buttonOk"));
+        Image iconStarFill = new Image(Assets.spriteButtonRate.getTexture());
         iconStarFill.setSize(this.size / 1.8f, this.size / 1.8f);
         iconStar.addActor(iconStarFill);
         return iconStar;

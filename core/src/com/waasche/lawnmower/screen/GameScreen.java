@@ -40,15 +40,18 @@ public class GameScreen implements Screen {
     final Vector3 intersection = new Vector3();
     private Lawnmower lawnmower;
     private Level currentLevel = null;
-    FieldPoint incPosition = null;
+    private FieldPoint incPosition = null;
     private MainClass mainClass = null;
     private boolean isMoving = false;
     private FieldLine currentLine;
     private LevelTypeMetaData levelTypeMetaData;
     private boolean isStopped = false;
     private Label levelLabel;
+    private Label attemptsLabel;
     private Label movesCount;
     private Label scoresLabel;
+    private Sprite levelTextRectangle = Assets.levelTextRectangle;
+    private Sprite attemptTextRectangle = Assets.attemptTextRectangle;
     private Actor startFromBeginningActor;
     private Actor leftButtonActor;
     private Actor rightButtonActor;
@@ -57,16 +60,19 @@ public class GameScreen implements Screen {
     private Stage stage;
     private boolean isStartFromBeginning = false;
     private Moves move = Moves.NONE;
+    private boolean isPaused;
 
 
     public GameScreen(MainClass mainClass, LevelTypeMetaData levelPackMetaData, int levelInd) {
+        Sounds.playBackgroundMusic(0);
         this.mainClass = mainClass;
         this.levelInd = levelInd;
         this.boardSize = levelPackMetaData.getId();
         this.levelTypeMetaData = levelPackMetaData;
-        this.currentLevel = Assets.levelsList.get(this.boardSize).getLevels().get(this.levelInd - 1);
+        this.currentLevel = Assets.levelsList.get(this.boardSize).getLevels().get(levelInd - 1);
         this.currentLevel.setPassedLines(new ArrayList<FieldLine>());
         this.currentLevel.setPassedPoints(new ArrayList<FieldPoint>());
+        GameProgress.setAttempt("" + levelPackMetaData.getId(), "" + levelInd);
         Gdx.graphics.setContinuousRendering(true);
         prepareStage(levelInd);
         Gdx.input.setInputProcessor(stage);
@@ -76,7 +82,19 @@ public class GameScreen implements Screen {
 
     private void prepareStage(int levelInd) {
         Assets.labelStyle.font = Assets.fontLarge;
+        Assets.mediumLableStyle.font = Assets.fontMedium;
+        Assets.smallLabelStyle.font = Assets.fontSmall;
         levelLabel = new Label(Assets.strings.get("level") + " " + levelTypeMetaData.getId() + "/" + levelInd, Assets.labelStyle);
+        levelLabel.setX(6f * Assets.SCREEN_UNIT);
+        levelLabel.setY(1.1f * Assets.SCREEN_UNIT);
+        attemptsLabel = new Label(Assets.strings.get("attempt") + " " + GameProgress.getAttempt("" + levelTypeMetaData.getId(), "" + levelInd), Assets.mediumLableStyle);
+        attemptsLabel.setX(65f*Assets.SCREEN_UNIT);
+        attemptsLabel.setY(2.4f*Assets.SCREEN_UNIT);
+        attemptsLabel.setX(65f*Assets.SCREEN_UNIT);
+        attemptsLabel.setY(1.0f*Assets.SCREEN_UNIT);
+        levelTextRectangle.setOrigin(levelLabel.getOriginX(), levelLabel.getOriginY());
+        attemptTextRectangle.setX(attemptsLabel.getX() + 10f*Assets.SCREEN_UNIT);
+        attemptTextRectangle.setY(attemptsLabel.getY() + 0.2f*Assets.SCREEN_UNIT);
         movesCount = new Label(Assets.strings.get("moves") + " 0", Assets.labelStyle);
         scoresLabel = new Label(Assets.strings.get("scores") + " 0", Assets.labelStyle);
         stage = new Stage();
@@ -106,7 +124,7 @@ public class GameScreen implements Screen {
         });
         upButtonActor = new Image(Assets.spriteButtonArrowUp);
         upButtonActor.setRotation(45);
-        upButtonActor.setPosition(Assets.ANDROID_WIDTH - Assets.ANDROID_WIDTH*0.9f, Assets.ANDROID_HEIGHT * 0.36f);
+        upButtonActor.setPosition(Assets.ANDROID_WIDTH - Assets.ANDROID_WIDTH * 0.9f, Assets.ANDROID_HEIGHT * 0.36f);
         upButtonActor.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 move = Moves.UP;
@@ -114,7 +132,7 @@ public class GameScreen implements Screen {
         });
         downButtonActor = new Image(Assets.spriteButtonArrowDown);
         downButtonActor.setRotation(-135);
-        downButtonActor.setPosition(Assets.ANDROID_WIDTH - Assets.ANDROID_WIDTH*0.9f, Assets.ANDROID_HEIGHT * 0.4f);
+        downButtonActor.setPosition(Assets.ANDROID_WIDTH - Assets.ANDROID_WIDTH * 0.9f, Assets.ANDROID_HEIGHT * 0.4f);
         downButtonActor.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 move = Moves.DOWN;
@@ -128,10 +146,16 @@ public class GameScreen implements Screen {
         stage.addActor(downButtonActor);
     }
 
+    private void startNextLevel(){
+        Sounds.continueMusic();
+        GameProgress.setCompleted("" + boardSize, "" + levelInd, true);
+        mainClass.setCurrentScreen(new GameScreen(mainClass, levelTypeMetaData, levelInd + 1));
+    }
+
     @Override
     public void show() {
         lawnmower = Assets.lawnmowerUpRight;
-        Sounds.lwStarts(0.1f);
+        Sounds.playBackgroundMusic(0.1f);
         cam = new OrthographicCamera(currentLevel.getSizeX() * 2, currentLevel.getSizeY() * 2 * (Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth()));
         cam.position.set(currentLevel.getSizeX(), currentLevel.getSizeY() * 0.5f, currentLevel.getSizeX());
         cam.direction.set(-1, -1, -1);
@@ -162,7 +186,11 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         drawBgBatch();
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && isPaused){
+            isPaused = false;
+            startNextLevel();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             backToMenu();
             return;
         }
@@ -184,7 +212,7 @@ public class GameScreen implements Screen {
         }
         if (incPosition != null) {
             FieldPoint movePosition = new FieldPoint((int) lawnmower.getX() + incPosition.getX(), (int) lawnmower.getY() + incPosition.getY());
-            if (LevelService.isAllowToMove(currentLevel, movePosition)) {
+            if (LevelService.isAllowToMove(currentLevel, movePosition) && !isStartFromBeginning) {
                 currentLine.addPoint(movePosition);
                 currentLevel.addPassedPoints(movePosition);
                 lawnmower.setLawnmowerPosition(movePosition);
@@ -208,13 +236,15 @@ public class GameScreen implements Screen {
                 }
                 isStopped = false;
             } else {
-                isMoving = false;
-                if (!isStopped) {
-                    Sounds.playTickSound(0.1f);
-                    isStopped = true;
-                }
-                if (LevelService.isOver(currentLevel, COMPLEXITY_INDEX)) {
-                    moveToNextLevel();
+                if(!isStartFromBeginning) {
+                    isMoving = false;
+                    if (!isStopped && !isPaused) {
+                        Sounds.playStopSound(0.1f);
+                        isStopped = true;
+                    }
+                    if (LevelService.isOver(currentLevel, COMPLEXITY_INDEX)) {
+                        moveToNextLevel();
+                    }
                 }
             }
         }
@@ -236,11 +266,15 @@ public class GameScreen implements Screen {
 
     private void drawBgBatch() {
         bgBatch.begin();
-        Assets.spriteBackground.draw(bgBatch);
-        levelLabel.draw(bgBatch, 1f);
+        Assets.imageBackground.draw(bgBatch);
+        levelTextRectangle.draw(bgBatch);
+        attemptTextRectangle.draw(bgBatch);
+        levelLabel.draw(bgBatch, 0.8f);
+        attemptsLabel.draw(bgBatch, 0.8f);
         bgBatch.end();
         stage.draw();
         stage.act();
+
     }
 
     private void moveToNextLevel() {
@@ -248,11 +282,16 @@ public class GameScreen implements Screen {
             GameProgress.setCompleted("" + boardSize, "" + levelInd, true);
             backToMenu();
         } else {
-            GameProgress.setCompleted("" + boardSize, "" + levelInd, true);
-            mainClass.setCurrentScreen(new GameScreen(mainClass, levelTypeMetaData, levelInd + 1));
-            this.dispose();
+            Sounds.stopMusic();
+            if(!isPaused) {
+                isStartFromBeginning = true;
+                Sounds.playLevelFinished(0);
+            }
+            isPaused = true;
         }
+        GameProgress.setFirstSuccess("" + levelTypeMetaData.getId(),"" + levelInd);
     }
+
 
     private void restartCurrentLevel() {
         mainClass.setCurrentScreen(new GameScreen(mainClass, levelTypeMetaData, levelInd));

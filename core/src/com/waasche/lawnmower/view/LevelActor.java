@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Align;
 import com.waasche.lawnmower.data.GameProgress;
 import com.waasche.lawnmower.data.Level;
 import com.waasche.lawnmower.data.LevelTypeMetaData;
@@ -28,8 +29,14 @@ public class LevelActor extends Group {
         Label label = new Label(metaData.getName(), skin, "lightMedium");
         label.setColor(completed ? Assets.colorBackground : levelPackMetaData.getColor());
         label.setBounds(0.0f, 0.0f, size, size);
-        label.setAlignment(1);
+        label.setAlignment(Align.left);
         addActor(label);
+        if(completed){
+            Label labelSmall = new Label("" + GameProgress.getFirstSuccess("" + levelPackMetaData.getId(), "" + metaData.getName()), skin, "lightSmall");
+            labelSmall.setBounds(0.0f, 0.0f, size, size);
+            labelSmall.setAlignment(Align.top);
+            addActor(labelSmall);
+        }
         setSize(size, size);
     }
 

@@ -2,13 +2,18 @@ package com.waasche.lawnmower.resources;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.waasche.lawnmower.data.Lawnmower;
 import com.waasche.lawnmower.data.Level;
@@ -47,16 +52,19 @@ public class Assets {
     public static Sprite spriteTitle;
     public static Sprite spriteStart;
     public static Sprite spriteButtonBack;
-    public static Sprite spriteBackground;
+    public static Sprite imageBackground;
     public static Sound soundClick;
     public static float pitchBackClick = 1f;
     public static Sprite spriteButtonHelp;
     public static Sprite spriteButtonSoundOn;
     public static float pitchLwSound = 1f;
     public static Sprite spriteButtonSoundOff;
-    public static Sound soundLwMove;
-    public static Sound soundTick;
+    public static Music startScreenMusic;
+    public static Music levelSelectScreenMusic;
+    public static Music backgroundMusic;
+    public static Sound soundStopLwm;
     public static Sound soundCrash;
+    public static Sound soundLevelFinished;
     public static final int VIBRATE_MSEC = 500;
     public static Sprite spriteLogoWaasche;
     public static Sprite spriteLogoLibGdx;
@@ -68,6 +76,15 @@ public class Assets {
     public static Sprite spriteButtonArrowDown;
     public static Sprite[] spritesTutorial;
     public static Label.LabelStyle labelStyle;
+    public static Label.LabelStyle smallLabelStyle;
+    public static Label.LabelStyle mediumLableStyle;
+    public static Sprite levelTextRectangle;
+    public static Sprite attemptTextRectangle;
+    public static Image grassBackgroundImage;
+    public static Drawable backButtonDrawable;
+    public static Drawable gradientRectangle;
+    public static Sprite spriteDonateButton;
+
 
 
     public static void load() {
@@ -78,6 +95,11 @@ public class Assets {
         wallSprite = new Sprite(new Texture(Gdx.files.internal("data/wall.png")));
         spriteTitle = createSprite("menu/title.png");
         spriteStart = createSprite("menu/start.png");
+        levelTextRectangle = createSprite("data/levelrect.png");
+        levelTextRectangle.scale(0.13f* Assets.SCREEN_UNIT);
+        attemptTextRectangle = createSprite("data/levelrect.png");
+        attemptTextRectangle.scale(0.16f* Assets.SCREEN_UNIT);
+        grassBackgroundImage = new Image(new Texture(AssetLoader.getInternalPath("data/background.png")));
         spriteLogoWaasche = createSprite("menu/Waasche.png");
         spriteLogoLibGdx = createSprite("menu/logo_libgdx.jpg");
         spriteButtonRate = createSprite("menu/rate.png");
@@ -92,6 +114,7 @@ public class Assets {
         spritesTutorial[0] = createSprite("menu/tutorial0.png");
         spritesTutorial[1] = createSprite("menu/tutorial1.png");
         spritesTutorial[2] = createSprite("menu/tutorial2.png");
+        spriteDonateButton = createSprite("menu/donate.png");
         levelsList.put(4, new Level("levels/levels4.json").getLevelsList());
         levelsList.put(5, new Level("levels/levels5.json").getLevelsList());
         levelsList.put(6, new Level("levels/levels6.json").getLevelsList());
@@ -104,19 +127,27 @@ public class Assets {
         fontMedium = new BitmapFont();
         fontScale = 0.0f;
         labelStyle = new Label.LabelStyle();
+        smallLabelStyle = new Label.LabelStyle();
+        mediumLableStyle = new Label.LabelStyle();
         strings = I18NBundle.createBundle(com.waasche.lawnmower.resources.AssetLoader.getInternalFileHandler("strings/strings"));
         colorText = createColor(255, 255, 255);
         spriteButtonOk = createSprite("menu/ok.png");
         spriteButtonBack = createSprite("menu/back_button.png");
+        spriteButtonBack.flip(true, false);
+        backButtonDrawable =  new TextureRegionDrawable(new TextureRegion(spriteButtonBack.getTexture()));
+        gradientRectangle = new TextureRegionDrawable(new TextureRegion(new Texture(AssetLoader.getInternalPath("menu/gradient.png"))));
         spriteButtonHelp = createSprite("menu/help_button.png");
         spriteButtonSoundOn = createSprite("menu/sound_on.png");
         spriteButtonSoundOff = createSprite("menu/sound_off.png");
-        spriteBackground = createSprite("menu/level_bg.png");
-        colorButtonLevelIncomplete = createColor(50, 50, 50);
-        soundClick = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/click.ogg"));
-        soundLwMove = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/lwmove.mp3"));
-        soundTick = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/tick.wav"));
-        soundCrash = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/crash.mp3"));
+        imageBackground = createSprite("menu/level_bg.png");
+        colorButtonLevelIncomplete = createColor(25, 50, 50);
+        soundClick = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/click.mp3"));
+        soundStopLwm = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/stopLwm.mp3"));
+        soundCrash = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/wrongMove.mp3"));
+        soundLevelFinished = Gdx.audio.newSound(AssetLoader.getInternalFileHandler("sounds/levelFinished.mp3"));
+        startScreenMusic = Gdx.audio.newMusic(AssetLoader.getInternalFileHandler("sounds/startScreenMusic.mp3"));
+        levelSelectScreenMusic = Gdx.audio.newMusic(AssetLoader.getInternalFileHandler("sounds/levelSelectMusic.mp3"));
+        backgroundMusic = Gdx.audio.newMusic(AssetLoader.getInternalFileHandler("sounds/backgroundMusic.mp3"));
     }
 
     public static Sprite createSprite(String path) {

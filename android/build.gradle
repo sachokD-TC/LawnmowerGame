@@ -1,5 +1,5 @@
 android {
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26'
     compileSdkVersion 27
     sourceSets {
         main {
@@ -24,8 +24,8 @@ android {
         applicationId "com.waasche.lawnmower"
         minSdkVersion 9
         targetSdkVersion 27
-        versionCode 18
-        versionName "1.14"
+        versionCode 30
+        versionName "2.10"
     }
 
     signingConfigs {

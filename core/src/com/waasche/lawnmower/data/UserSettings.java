@@ -2,6 +2,7 @@ package com.waasche.lawnmower.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.waasche.lawnmower.resources.Sounds;
 
 /**
  * Created by sadm on 12/8/2017.
@@ -26,5 +27,6 @@ public class UserSettings {
     public static void toggleSound() {
         preferences.putBoolean(SOUND, !isSoundOn());
         preferences.flush();
+        Sounds.toggleMusic();
     }
 }

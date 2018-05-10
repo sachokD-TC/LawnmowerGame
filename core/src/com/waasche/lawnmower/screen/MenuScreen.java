@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -28,10 +29,12 @@ public abstract class MenuScreen implements Screen {
     protected Table container;
     protected Stage stage;
     protected Skin skin;
+    private ShapeRenderer shapeRenderer;
     public int levelInd;
 
 
     public MenuScreen(MainClass mainClass, int levelInd) {
+        shapeRenderer = new ShapeRenderer();
         Assets.updateFont(Assets.SCREEN_UNIT / 5.0f);
         this.mainClass = mainClass;
         this.levelInd = levelInd;
@@ -60,6 +63,7 @@ public abstract class MenuScreen implements Screen {
         this.skin.add("start", Assets.spriteStart, Sprite.class);
         this.skin.add("buttonSoundOn", Assets.spriteButtonSoundOn, Sprite.class);
         this.skin.add("buttonSoundOff", Assets.spriteButtonSoundOff, Sprite.class);
+        this.skin.add("playButton", Assets.createSprite("actor/down-left.png"), Sprite.class);
         Assets.updateFont(Assets.SCREEN_UNIT / 5.0f);
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(new MenuInputProcessor(this, mainClass));
@@ -82,6 +86,7 @@ public abstract class MenuScreen implements Screen {
         stage.act();
         stage.draw();
     }
+
 
     public void buttonClick(MenuButtonActor button) {
     }

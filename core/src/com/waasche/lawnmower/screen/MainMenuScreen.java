@@ -6,10 +6,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.waasche.lawnmower.data.LevelTypeMetaData;
 import com.waasche.lawnmower.data.SessionData;
@@ -74,8 +72,24 @@ public class MainMenuScreen extends MenuScreen implements Screen {
     public void createLayout() {
         this.list.clearChildren();
         this.container.clearChildren();
+        this.container.setWidth(Assets.SCREEN_UNIT*1500f);
+        Table upTable = new Table();
+        Button backButton = new Button(Assets.backButtonDrawable);
+        backButton.setTransform(true);
+        backButton.setOrigin(backButton.getWidth()/2, backButton.getHeight()/2);
+        backButton.addAction(Actions.rotateBy(180));
+        backButton.setScaleY(-1);
+        backButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                Sounds.playButtonClick(0.0f);
+                mainClass.setCurrentScreen(new StartScreen(mainClass));
+            }
+        });
+        upTable.add(backButton).padRight(22.22f*Assets.SCREEN_UNIT).padTop(2.5f*Assets.SCREEN_UNIT);
+        upTable.add(new Label(Assets.strings.get("levelPackHint"), this.skin, "lightMedium")).padRight(33.33f*Assets.SCREEN_UNIT);
+        this.container.add(upTable).expandX();
+        this.container.row();
         for (int i = 0; i != levelTypeMetaDataList.size(); i++) {
-            float f;
             Actor levelPackActor = new LevelTypeActor(levelTypeMetaDataList.get(i), this.skin, Assets.SCREEN_UNIT * 13.5f);
             levelPackActor.addListener(new LevelPackClickListener(levelPackActor));
             Cell width = this.list.add(levelPackActor).width(calcListWidth());
@@ -89,7 +103,6 @@ public class MainMenuScreen extends MenuScreen implements Screen {
         this.list.row();
         this.list.setWidth(calcListWidth());
         this.scroll.setScrollingDisabled(true, false);
-        this.container.add(new Label(Assets.strings.get("levelPackHint"), this.skin, "lightMedium")).height(Assets.SCREEN_UNIT * 10.0f).padBottom(Assets.SCREEN_UNIT * 2.0f).expandX();
         this.container.row();
         this.container.add(this.scroll).padBottom(isLandscape() ? -9.0f * Assets.SCREEN_UNIT : 0.0f).expand();
     }
@@ -123,7 +136,7 @@ public class MainMenuScreen extends MenuScreen implements Screen {
         }
 
         public void clicked(InputEvent event, float x, float y) {
-            Sounds.playMenuClick(0.0f);
+            Sounds.playButtonClick(0.0f);
             mainClass.setCurrentScreen(new LevelSelectScreen(mainClass, actor.getMetaData()));
             mainClass.showCurrentScreen();
         }

@@ -15,6 +15,7 @@ import com.waasche.lawnmower.data.Level;
 import com.waasche.lawnmower.data.LevelTypeMetaData;
 import com.waasche.lawnmower.main.MainClass;
 import com.waasche.lawnmower.resources.Assets;
+import com.waasche.lawnmower.resources.Sounds;
 import com.waasche.lawnmower.view.LevelActor;
 import com.waasche.lawnmower.view.MenuButtonActor;
 
@@ -29,6 +30,7 @@ public class LevelSelectScreen extends MenuScreen implements Screen {
 
     public LevelSelectScreen(MainClass mainClass, LevelTypeMetaData levelPackMetaData) {
         super(mainClass, levelPackMetaData.getId());
+        Sounds.playSelectLevelMusic();
         this.mainClass = mainClass;
         this.levelPackMetaData = levelPackMetaData;
         this.levelsMetaData = Assets.levelsList.get(levelPackMetaData.getId()).getLevels();
